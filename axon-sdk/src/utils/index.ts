@@ -17,8 +17,8 @@ export const createDefaultConfig = (websiteId: string, walletAddress: string, ov
       borderRadius: 0
     },
     payment: {
-      networks: ['polygon'],
-      defaultNetwork: 'polygon',
+      networks: ['base'],
+      defaultNetwork: 'base',
       recipientAddress: walletAddress
     },
     ...overrides

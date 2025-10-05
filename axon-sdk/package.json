@@ -1,7 +1,7 @@
 {
   "name": "axon-sdk",
   "version": "1.0.0",
-  "description": "A React SDK for Axon onchain ad platform with Base network integration",
+  "description": "A React SDK for onchain ad platforms with Base network integration",
   "license": "MIT",
   "author": "hatif03",
   "type": "module",
@@ -17,7 +17,8 @@
   "files": [
     "dist",
     "README.md",
-    "CONFIGURATION.md"
+    "CONFIGURATION.md",
+    "examples"
   ],
   "keywords": [
     "react",
@@ -26,11 +27,23 @@
     "onchain",
     "base",
     "onchainkit",
-    "web3"
+    "web3",
+    "ethereum",
+    "crypto",
+    "blockchain",
+    "ads",
+    "monetization"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/hatif03/axonlayer.git"
+    "url": "git+https://github.com/hatif03/axonlayer.git"
+  },
+  "homepage": "https://github.com/hatif03/axonlayer#readme",
+  "bugs": {
+    "url": "https://github.com/hatif03/axonlayer/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   },
   "dependencies": {
     "@coinbase/onchainkit": "^1.1.1",
