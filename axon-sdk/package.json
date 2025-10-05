@@ -1,7 +1,7 @@
 {
   "name": "axon-sdk",
   "version": "1.0.0",
-  "description": "A React SDK for onchain ad platforms with Base network integration",
+  "description": "A React SDK for Axon onchain ad platform with Base network integration",
   "license": "MIT",
   "author": "hatif03",
   "type": "module",
