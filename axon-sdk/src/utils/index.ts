@@ -7,7 +7,7 @@ export const createDefaultConfig = (websiteId: string, walletAddress: string, ov
   return {
     websiteId,
     walletAddress,
-    apiBaseUrl: 'https://api.your-ad-platform.com',
+    apiBaseUrl: 'https://api.axonlayer.com',
     theme: {
       primaryColor: '#000000',
       backgroundColor: '#ffffff',
@@ -19,7 +19,19 @@ export const createDefaultConfig = (websiteId: string, walletAddress: string, ov
     payment: {
       networks: ['base'],
       defaultNetwork: 'base',
-      recipientAddress: walletAddress
+      recipientAddress: walletAddress,
+      supportedTokens: [
+        {
+          symbol: 'USDC',
+          address: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', // Base USDC
+          decimals: 6,
+          chainId: 8453
+        }
+      ],
+      sponsorship: {
+        enabled: true,
+        paymasterUrl: 'https://paymaster.base.org'
+      }
     },
     ...overrides
   };
@@ -134,7 +146,7 @@ export const generateCheckoutUrl = (
   size: string,
   websiteId: string,
   walletAddress: string,
-  apiBaseUrl: string = 'https://api.your-ad-platform.com',
+  apiBaseUrl: string = 'https://api.axonlayer.com',
   additionalParams?: Record<string, string>
 ): string => {
   const params = new URLSearchParams({
@@ -158,7 +170,7 @@ export const generateUploadUrl = (
   size: string,
   websiteId: string,
   walletAddress: string,
-  apiBaseUrl: string = 'https://api.your-ad-platform.com',
+  apiBaseUrl: string = 'https://api.axonlayer.com',
   additionalParams?: Record<string, string>
 ): string => {
   const params = new URLSearchParams({
@@ -178,7 +190,7 @@ export const generateUploadUrl = (
  */
 export const fetchAdData = async (
   slotId: string,
-  apiBaseUrl: string = 'https://api.your-ad-platform.com'
+  apiBaseUrl: string = 'https://ad402.io'
 ): Promise<AdData> => {
   const response = await fetch(`${apiBaseUrl}/api/ads/${slotId}`);
   
@@ -194,7 +206,7 @@ export const fetchAdData = async (
  */
 export const fetchQueueInfo = async (
   slotId: string,
-  apiBaseUrl: string = 'https://api.your-ad-platform.com'
+  apiBaseUrl: string = 'https://ad402.io'
 ): Promise<QueueInfo> => {
   const response = await fetch(`${apiBaseUrl}/api/queue-info/${slotId}`);
   
@@ -208,7 +220,7 @@ export const fetchQueueInfo = async (
 /**
  * Create a custom hook for ad data
  */
-export const createAdDataHook = (slotId: string, apiBaseUrl: string = 'https://api.your-ad-platform.com') => {
+export const createAdDataHook = (slotId: string, apiBaseUrl: string = 'https://ad402.io') => {
   return {
     fetchAdData: () => fetchAdData(slotId, apiBaseUrl),
     fetchQueueInfo: () => fetchQueueInfo(slotId, apiBaseUrl)
@@ -256,7 +268,7 @@ export const trackAdEvent = (
   if (typeof window === 'undefined') return;
   
   // Send to analytics endpoint
-  fetch('https://api.your-ad-platform.com/api/analytics', {
+  fetch('https://api.axonlayer.com/api/analytics', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

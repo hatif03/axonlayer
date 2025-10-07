@@ -14,7 +14,7 @@ const createWagmiConfig = (walletConnectProjectId?: string) => createConfig({
   connectors: [
     coinbaseWallet({
       appName: 'Ad Platform',
-      appLogoUrl: 'https://your-ad-platform.com/logo.png',
+      appLogoUrl: 'https://axonlayer.com/logo.png',
     }),
     ...(walletConnectProjectId ? [walletConnect({
       projectId: walletConnectProjectId,
@@ -76,7 +76,7 @@ export const AdProvider: React.FC<{
 
   // Default configuration values
   const defaultConfig: AdConfig = {
-    apiBaseUrl: config.apiBaseUrl || 'https://api.your-ad-platform.com',
+    apiBaseUrl: 'https://api.axonlayer.com',
     theme: {
       primaryColor: '#000000',
       backgroundColor: '#ffffff',
@@ -107,7 +107,7 @@ export const AdProvider: React.FC<{
 
   const contextValue: AdContextType = {
     config: defaultConfig,
-    apiBaseUrl: defaultConfig.apiBaseUrl || 'https://api.your-ad-platform.com'
+    apiBaseUrl: defaultConfig.apiBaseUrl || 'https://api.axonlayer.com'
   };
 
   // If there's a configuration error, show it

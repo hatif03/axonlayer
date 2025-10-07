@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 // Ad Configuration
 export interface AdConfig {
-  /** Base URL of the Ad API (default: https://api.your-ad-platform.com) */
+  /** Base URL of the Ad API (default: https://api.axonlayer.com) */
   apiBaseUrl?: string;
   /** Your website's unique identifier */
   websiteId: string;

@@ -6,14 +6,14 @@ export function BasicAdExample() {
   const config = {
     websiteId: 'example-website-001',
     walletAddress: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
-    apiBaseUrl: 'https://api.your-ad-platform.com',
+    apiBaseUrl: 'https://api.axonlayer.com',
     theme: {
-      primaryColor: '#0052ff',
+      primaryColor: '#000000',
       backgroundColor: '#ffffff',
       textColor: '#000000',
       borderColor: '#e5e5e5',
-      fontFamily: 'Inter, sans-serif',
-      borderRadius: 8
+      fontFamily: 'JetBrains Mono, monospace',
+      borderRadius: 0
     },
     payment: {
       networks: ['base', 'base-sepolia'],

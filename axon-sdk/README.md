@@ -11,6 +11,7 @@ A React SDK for building onchain advertising platforms with Base network integra
 - ⚡ **Gas-Free Transactions**: Paymaster integration for sponsored transactions
 - 📱 **Responsive Design**: Mobile-friendly ad slot components
 - 🎯 **TypeScript**: Full TypeScript support with comprehensive types
+- 🌐 **RESTful API**: Clean API endpoints for seamless integration
 
 ## Installation
 
@@ -27,14 +28,14 @@ function App() {
   const config = {
     websiteId: 'your-website-id',
     walletAddress: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
-    apiBaseUrl: 'https://api.your-ad-platform.com',
+    apiBaseUrl: 'https://api.axonlayer.com',
     theme: {
-      primaryColor: '#0052ff',
+      primaryColor: '#000000',
       backgroundColor: '#ffffff',
       textColor: '#000000',
       borderColor: '#e5e5e5',
-      fontFamily: 'Inter, sans-serif',
-      borderRadius: 8
+      fontFamily: 'JetBrains Mono, monospace',
+      borderRadius: 0
     }
   };
 
@@ -99,6 +100,27 @@ The SDK expects your backend to provide the following endpoints:
 - `GET /api/ads/{slotId}` - Fetch ad data for a slot
 - `GET /api/queue-info/{slotId}` - Get queue information
 - `POST /api/analytics` - Track ad events
+
+## API Integration
+
+This SDK provides clean RESTful API endpoints for seamless integration:
+
+- ✅ **RESTful API**: Clean API endpoints at `https://api.axonlayer.com`
+- ✅ **Component Structure**: `AdProvider` and `AdSlot` for easy integration
+- ✅ **Configuration**: Simple configuration format
+- ✅ **Enhanced Features**: Base network support, OnchainKit integration, and wallet connection
+
+### Quick Integration
+
+```tsx
+// Import the SDK
+import { AdProvider, AdSlot } from 'axon-sdk';
+
+// Use with your configuration
+<AdProvider config={config}>
+  <AdSlot slotId="banner-001" size="banner" price="0.10" />
+</AdProvider>
+```
 
 ## Base Network
 

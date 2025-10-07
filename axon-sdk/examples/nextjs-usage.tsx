@@ -9,14 +9,14 @@ export function NextJSAdExample() {
   const config = {
     websiteId: process.env.NEXT_PUBLIC_WEBSITE_ID || 'nextjs-website-001',
     walletAddress: process.env.NEXT_PUBLIC_WALLET_ADDRESS || '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
-    apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.your-ad-platform.com',
+    apiBaseUrl: process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.axonlayer.com',
     theme: {
-      primaryColor: '#0052ff',
+      primaryColor: '#000000',
       backgroundColor: '#ffffff',
       textColor: '#000000',
       borderColor: '#e5e5e5',
-      fontFamily: 'Inter, sans-serif',
-      borderRadius: 8
+      fontFamily: 'JetBrains Mono, monospace',
+      borderRadius: 0
     },
     payment: {
       networks: ['base', 'base-sepolia'],
@@ -108,7 +108,7 @@ export function NextJSAdExample() {
         <pre className="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
 {`NEXT_PUBLIC_WEBSITE_ID=your-website-id
 NEXT_PUBLIC_WALLET_ADDRESS=0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6
-NEXT_PUBLIC_API_BASE_URL=https://api.your-ad-platform.com
+NEXT_PUBLIC_API_BASE_URL=https://api.axonlayer.com
 NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_onchainkit_api_key
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 NEXT_PUBLIC_PAYMASTER_URL=https://paymaster.base.org`}

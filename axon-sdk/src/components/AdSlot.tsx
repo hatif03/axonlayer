@@ -114,7 +114,7 @@ const DefaultEmptySlotComponent: React.FC<{
         </div>
       )}
       <div style={{ fontSize: fontSizes.small, marginBottom: '1px', lineHeight: '1.1', color: '#666' }}>
-        Base Network
+        Base USDC
       </div>
       {!isConnected && (
         <div style={{ fontSize: fontSizes.small, lineHeight: '1.1', color: theme.primaryColor, fontWeight: 'bold' }}>
