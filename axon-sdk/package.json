@@ -1,13 +1,19 @@
 {
   "name": "axon-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React SDK for onchain ad platforms with Base network integration",
   "license": "MIT",
   "author": "hatif03",
-  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
