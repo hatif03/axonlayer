@@ -13,9 +13,32 @@ function TestUploadPageContent() {
   const searchParams = useSearchParams();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploadResult, setUploadResult] = useState<unknown>(null);
+  const [uploadResult, setUploadResult] = useState<{
+    success: boolean;
+    message: string;
+    hash?: string;
+    submission?: {
+      id: string;
+      status: string;
+      fileUpload?: {
+        hash: string;
+        url: string;
+        fileName: string;
+        fileSize: number;
+        mimeType: string;
+      };
+    };
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [paymentData, setPaymentData] = useState<unknown>(null);
+  const [paymentData, setPaymentData] = useState<{
+    slotId: string;
+    walletAddress: string;
+    price: string;
+    transactionHash: string;
+    size: string;
+    category: string;
+    network: string;
+  } | null>(null);
 
   // Extract payment data from URL parameters
   useEffect(() => {
@@ -253,25 +276,25 @@ function TestUploadPageContent() {
                   <div className="space-y-3">
                     <div>
                       <Label className="text-sm font-medium text-gray-500">Submission ID</Label>
-                      <p className="text-sm font-mono">{uploadResult.submission.id}</p>
+                      <p className="text-sm font-mono">{uploadResult.submission?.id}</p>
                     </div>
 
-                    {uploadResult.submission.fileUpload && (
+                    {uploadResult.submission?.fileUpload && (
                       <>
                         <div>
                           <Label className="text-sm font-medium text-gray-500">IPFS Hash</Label>
-                          <p className="text-sm font-mono break-all">{uploadResult.submission.fileUpload.hash}</p>
+                          <p className="text-sm font-mono break-all">{uploadResult.submission?.fileUpload?.hash}</p>
                         </div>
 
                         <div>
                           <Label className="text-sm font-medium text-gray-500">File URL</Label>
                           <a
-                            href={uploadResult.submission.fileUpload.url}
+                            href={uploadResult.submission?.fileUpload?.url}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-sm text-blue-600 hover:text-blue-800 break-all"
                           >
-                            {uploadResult.submission.fileUpload.url}
+                            {uploadResult.submission?.fileUpload?.url}
                           </a>
                         </div>
 
@@ -289,7 +312,7 @@ function TestUploadPageContent() {
                     <div>
                       <Label className="text-sm font-medium text-gray-500">Status</Label>
                       <Badge variant="secondary" className="mt-1">
-                        {uploadResult.submission.status}
+                        {uploadResult.submission?.status}
                       </Badge>
                     </div>
                   </div>

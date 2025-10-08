@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { useGreeting } from "../hooks/useGreeting";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
+// import { useGreeting } from "../hooks/useGreeting";
+// import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { toast } from "react-toastify";
 
 const Greeting = () => {
@@ -23,16 +23,23 @@ const Greeting = () => {
     newGreetingInputRef.current?.blur();
   };
 
-  const {
-    address,
-    greeting,
-    getGreetingLoading,
-    getGreetingError,
-    setGreeting,
-    setGreetingLoading,
-    prepareSetGreetingError,
-    setGreetingError,
-  } = useGreeting({ newGreeting, onSetGreetingSuccess });
+  // const {
+  //   address,
+  //   greeting,
+  //   getGreetingLoading,
+  //   getGreetingError,
+  //   setGreeting,
+  //   setGreetingLoading,
+  //   prepareSetGreetingError,
+  //   setGreetingError,
+  // } = useGreeting({ newGreeting, onSetGreetingSuccess });
+  const [address] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState<string>("Hello, World!");
+  const [getGreetingLoading, setGetGreetingLoading] = useState<boolean>(false);
+  const [getGreetingError, setGetGreetingError] = useState<string | null>(null);
+  const [setGreetingLoading, setSetGreetingLoading] = useState<boolean>(false);
+  const [prepareSetGreetingError, setPrepareSetGreetingError] = useState<string | null>(null);
+  const [setGreetingError, setSetGreetingError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!address) {
@@ -40,7 +47,7 @@ const Greeting = () => {
     }
   }, [address]);
 
-  const { openConnectModal } = useConnectModal();
+  // const { openConnectModal } = useConnectModal();
 
   return (
     <div className="space-y-8">
@@ -76,7 +83,10 @@ const Greeting = () => {
           />
           <button
             className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white py-4 px-8 rounded-md"
-            onClick={setGreeting}
+            onClick={() => {
+              // Handle greeting update
+              console.log('Update greeting clicked');
+            }}
             disabled={
               !address ||
               !newGreeting ||
@@ -91,7 +101,10 @@ const Greeting = () => {
           {!address && (
             <button
               className="text-sm text-gray-500 text-center underline hover:opacity-80"
-              onClick={openConnectModal}
+              onClick={() => {
+                // Connect wallet functionality
+                console.log('Connect wallet clicked');
+              }}
             >
               Connect your wallet to set a new greeting
             </button>

@@ -1,5 +1,4 @@
 import "./globals.css";
-import "@rainbow-me/rainbowkit/styles.css";
 import "react-toastify/dist/ReactToastify.css";
 import type { Metadata } from "next";
 import { JetBrains_Mono as FontMono } from "next/font/google";

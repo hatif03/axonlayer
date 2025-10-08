@@ -143,7 +143,7 @@ export default function TestAdsPage() {
                   <div className="mb-4">
                     <AdSlot
                       slotId={slot.id}
-                      size={slot.size as string}
+                      size={slot.size as "card" | "square" | "banner" | "mobile" | "sidebar" | "leaderboard"}
                       price={slot.basePrice}
                       durations={slot.durationOptions}
                       category={slot.category}

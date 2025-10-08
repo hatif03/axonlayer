@@ -78,7 +78,7 @@ export class WalletConnectService {
     }
 
     try {
-      await window.ethereum.request({
+      await (window as unknown as { ethereum: { request: (args: unknown) => Promise<unknown> } }).ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: `0x${chainId.toString(16)}` }],
       });
@@ -93,8 +93,8 @@ export class WalletConnectService {
    */
   getNetworkName(chainId: number): string {
     const networks: { [key: number]: string } = {
-      137: 'Polygon Mainnet',
-      80002: 'Polygon Amoy Testnet',
+      8453: 'Base Mainnet',
+      84532: 'Base Sepolia Testnet',
     };
     return networks[chainId] || `Chain ${chainId}`;
   }
@@ -120,6 +120,7 @@ export class WalletConnectService {
 // Extend Window interface to include ethereum
 declare global {
   interface Window {
-    ethereum?: unknown;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ethereum?: any;
   }
 }

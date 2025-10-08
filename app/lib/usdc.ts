@@ -1,22 +1,22 @@
-import { createPublicClient, createWalletClient, http, parseUnits, formatUnits, keccak256, getContract, type Hash, type Address } from 'viem';
-import { polygon, polygonAmoy } from 'viem/chains';
+import { createPublicClient, createWalletClient, http, parseUnits, formatUnits, keccak256, getContract, type Hash, type Address, type Client, type Transport, type Chain } from 'viem';
+import { base, baseSepolia } from 'viem/chains';
 
-// USDC Contract Addresses - UPDATED with correct addresses
+// USDC Contract Addresses - Updated for Base network
 export const USDC_CONTRACTS = {
-  polygon: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359', // Polygon Mainnet USDC (correct address)
-  polygonAmoy: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582', // Polygon Amoy Testnet USDC
+  base: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', // Base Mainnet USDC
+  baseSepolia: '0x036CbD53842c5426634e7929541eC2318f3dCF7e', // Base Sepolia Testnet USDC
 };
 
-// USDC Configuration with correct EIP-712 details
+// USDC Configuration with correct EIP-712 details for Base
 export const USDC_CONFIG = {
-  137: { // Polygon Mainnet
-    address: '0x3c499c542cef5e3811e1192ce70d8cc03d5c3359',
+  8453: { // Base Mainnet
+    address: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
     name: 'USD Coin',
     version: '2',
     decimals: 6
   },
-  80002: { // Polygon Amoy
-    address: '0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582',
+  84532: { // Base Sepolia
+    address: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
     name: 'USDC',
     version: '2',
     decimals: 6
@@ -97,9 +97,10 @@ export interface TransferWithAuthorizationParams {
 export class USDCService {
   private publicClient: unknown;
   private walletClient: unknown;
-  private contract: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private contract: any;
   private chainId: number;
-  private config: typeof USDC_CONFIG[137] | typeof USDC_CONFIG[80002];
+  private config: typeof USDC_CONFIG[8453] | typeof USDC_CONFIG[84532];
 
   constructor(publicClient: unknown, walletClient: unknown, chainId: number) {
     this.publicClient = publicClient;
@@ -113,8 +114,8 @@ export class USDCService {
       address: this.config.address as Address,
       abi: USDC_ABI,
       client: {
-        public: publicClient,
-        wallet: walletClient
+        public: publicClient as Client<Transport, Chain | undefined>,
+        wallet: walletClient as Client<Transport, Chain | undefined>
       }
     });
   }
@@ -122,14 +123,14 @@ export class USDCService {
   private getUSDCConfig(chainId: number) {
     const config = USDC_CONFIG[chainId as keyof typeof USDC_CONFIG];
     if (!config) {
-      throw new Error(`Unsupported chain ID: ${chainId}. Supported chains: 137 (Polygon), 80002 (Polygon Amoy)`);
+      throw new Error(`Unsupported chain ID: ${chainId}. Supported chains: 8453 (Base), 84532 (Base Sepolia)`);
     }
     return config;
   }
 
   // Static method to check if chain is supported
   static isSupportedChain(chainId: number): boolean {
-    return chainId === 137 || chainId === 80002;
+    return chainId === 8453 || chainId === 84532;
   }
 
   // Static method to get USDC config
@@ -143,7 +144,7 @@ export class USDCService {
       console.log('Using contract address:', this.contract.address);
       console.log('Chain ID:', this.chainId);
       
-      const balance = await this.contract.read.balanceOf([address]);
+      const balance = await this.contract.read.balanceOf([address as `0x${string}`]);
       console.log('Raw balance from contract:', balance.toString());
       
       const formattedBalance = formatUnits(balance, this.config.decimals);
@@ -157,7 +158,7 @@ export class USDCService {
   }
 
   async getAllowance(owner: Address, spender: Address): Promise<string> {
-    const allowance = await this.contract.read.allowance([owner, spender]);
+    const allowance = await this.contract.read.allowance([owner as `0x${string}`, spender as `0x${string}`]);
     return formatUnits(allowance, this.config.decimals);
   }
 
@@ -178,15 +179,15 @@ export class USDCService {
     const valueInWei = parseUnits(value, this.config.decimals);
 
     return await this.contract.write.transferWithAuthorization([
-      from,
-      to,
+      from as `0x${string}`,
+      to as `0x${string}`,
       valueInWei,
       validAfter,
       validBefore,
-      nonce,
-      v,
-      r,
-      s
+      nonce as `0x${string}`,
+      v.toString() as `0x${string}`,
+      r as `0x${string}`,
+      s as `0x${string}`
     ]);
   }
 
@@ -230,7 +231,7 @@ export class USDCService {
     console.log('EIP-712 Domain:', domain);
     console.log('EIP-712 Message:', message);
 
-    const signature = await this.walletClient.signTypedData({
+    const signature = await (this.walletClient as { signTypedData: (args: unknown) => Promise<string> }).signTypedData({
       domain,
       types,
       primaryType: 'TransferWithAuthorization',
@@ -339,10 +340,10 @@ export class USDCService {
   // Helper method to get network name
   getNetworkName(): string {
     switch (this.chainId) {
-      case 137:
-        return 'Polygon Mainnet';
-      case 80002:
-        return 'Polygon Amoy';
+      case 8453:
+        return 'Base Mainnet';
+      case 84532:
+        return 'Base Sepolia';
       default:
         return `Chain ${this.chainId}`;
     }

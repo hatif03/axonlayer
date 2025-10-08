@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAccount, useDisconnect } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useAccount, useDisconnect, useConnect } from 'wagmi';
+import { Connected } from '@coinbase/onchainkit';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { coinbaseWallet } from 'wagmi/connectors';
 
 // Simple SVG icons
 const WalletIcon = ({ className }: { className?: string }) => (
@@ -35,6 +36,7 @@ interface WalletConnectModalProps {
 export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisconnect }: WalletConnectModalProps) {
   const { address, isConnected, chainId } = useAccount();
   const { disconnect } = useDisconnect();
+  const { connect } = useConnect();
 
   useEffect(() => {
     if (isConnected && address && chainId) {
@@ -68,11 +70,31 @@ export default function WalletConnectModal({ isOpen, onClose, onConnect, onDisco
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {!isConnected ? (
-            <div className="space-y-3">
-              <ConnectButton />
-            </div>
-          ) : (
+                  {!isConnected ? (
+                    <div className="space-y-3">
+                      <Button 
+                        onClick={() => {
+                          try {
+                            // Use wagmi's connect function instead of direct ethereum calls
+                            connect({ connector: coinbaseWallet() });
+                          } catch (error) {
+                            console.error('Wallet connection failed:', error);
+                            // Fallback to direct ethereum call if wagmi fails
+                            if (typeof window !== 'undefined' && window.ethereum) {
+                              try {
+                                window.ethereum.request({ method: 'eth_requestAccounts' });
+                              } catch (fallbackError) {
+                                console.error('Fallback wallet connection failed:', fallbackError);
+                              }
+                            }
+                          }
+                        }}
+                        className="bg-primary text-primary-foreground hover:bg-primary/90"
+                      >
+                        Connect Wallet
+                      </Button>
+                    </div>
+                  ) : (
             <div className="space-y-4">
               <div className="flex items-center justify-between p-3 bg-green-50 border border-green-200 rounded-lg">
                 <div className="flex items-center gap-3">

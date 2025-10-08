@@ -4,7 +4,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAccount, useDisconnect, useWalletClient } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { OnchainKitIdentity } from '../../components/OnchainKitIdentity';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 // import { Badge } from '@/components/ui/badge';
@@ -57,16 +57,16 @@ interface QueueInfo {
   isAvailable: boolean;
 }
 
-// USDC contract addresses and details
+// USDC contract addresses and details for Base
 const USDC_CONFIG = {
-  "137": {
-    address: "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+  "8453": {
+    address: "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
     name: "USD Coin",
     decimals: 6,
     version: "2"
   },
-  "80002": {
-    address: "0x41E94Eb019C0762f9Bfcf9Fb1E58725BfB0e7582", 
+  "84532": {
+    address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e", 
     name: "USDC",
     decimals: 6,
     version: "2"
@@ -138,12 +138,12 @@ function CheckoutPageContent() {
 
   // Check if user is on supported network
   const isSupportedNetwork = () => {
-    return chainId === 80002 || chainId === 137; // Polygon Amoy or Polygon Mainnet
+    return chainId === 84532 || chainId === 8453; // Base Sepolia or Base Mainnet
   };
 
   const getNetworkName = (chainId?: number) => {
-    if (chainId === 80002) return 'Polygon Amoy';
-    if (chainId === 137) return 'Polygon Mainnet';
+    if (chainId === 84532) return 'Base Sepolia';
+    if (chainId === 8453) return 'Base Mainnet';
     return `Chain ${chainId}`;
   };
 
@@ -155,7 +155,7 @@ function CheckoutPageContent() {
     if (!isSupportedNetwork()) {
       setConnectionStatus({ 
         type: 'error', 
-        message: 'Please switch to Polygon network' 
+        message: 'Please switch to Base network' 
       });
       return;
     }
@@ -178,7 +178,7 @@ function CheckoutPageContent() {
       setConnectionStatus({ type: 'loading', message: 'Processing payment...' });
       
       // Create x402 PaymentPayload and PaymentRequirements
-      const x402Network = chainId === 137 ? 'polygon' : 'polygon-amoy';
+      const x402Network = chainId === 8453 ? 'base' : 'base-sepolia';
       
       const paymentPayload = {
         x402Version: 1,
@@ -288,7 +288,7 @@ function CheckoutPageContent() {
       if (window.parent !== window) {
         window.parent.postMessage({
           type: 'PAYMENT_ERROR',
-          error: error.message
+          error: error instanceof Error ? error.message : 'Unknown error'
         }, '*');
       }
     }
@@ -351,7 +351,7 @@ function CheckoutPageContent() {
     };
 
     // Sign the message
-    const signature = await walletClient.signTypedData({
+    const signature = await (walletClient as { signTypedData: (args: unknown) => Promise<string> }).signTypedData({
       domain,
       types,
       primaryType: 'TransferWithAuthorization',
@@ -445,7 +445,7 @@ function CheckoutPageContent() {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Network:</span>
-                  <span className="text-foreground">Polygon</span>
+                  <span className="text-foreground">Base</span>
                 </div>
               </div>
             </CardContent>
@@ -549,7 +549,7 @@ function CheckoutPageContent() {
                   Connect your wallet to continue
                 </p>
                 <div className="flex justify-center">
-                  <ConnectButton />
+                  <OnchainKitIdentity />
                 </div>
               </div>
             ) : (
@@ -570,7 +570,7 @@ function CheckoutPageContent() {
                 {chainId && !isSupportedNetwork() && (
                   <div className="p-3 bg-secondary border border-border">
                     <p className="text-sm font-mono text-muted-foreground">
-                      ⚠️ Please switch to Polygon network
+                      ⚠️ Please switch to Base network
                     </p>
                   </div>
                 )}

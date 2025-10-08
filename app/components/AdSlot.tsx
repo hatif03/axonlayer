@@ -420,7 +420,7 @@ export class USDCService {
     };
 
     // Sign the message
-    const signature = await walletClient.signTypedData({
+    const signature = await (walletClient as { signTypedData: (args: unknown) => Promise<string> }).signTypedData({
       domain,
       types,
       primaryType: 'TransferWithAuthorization',
@@ -456,7 +456,7 @@ export class USDCService {
       body: JSON.stringify({
         signature: signatureData.signature,
         signatureData,
-        ...additionalData,
+        ...(additionalData as Record<string, unknown>),
         timestamp: Date.now()
       })
     });

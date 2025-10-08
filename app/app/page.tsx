@@ -1,10 +1,16 @@
 import { AdProvider, AdSlot } from "../components/Ad";
+import { OnchainKitIdentity } from "../components/OnchainKitIdentity";
 import Link from "next/link";
 
 const Home = () => {
   return (
     <AdProvider publisherWallet="0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32">
       <main className="min-h-screen bg-background">
+        {/* Wallet Connection */}
+        <div className="flex justify-end p-4">
+                <OnchainKitIdentity />
+        </div>
+        
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center mb-16">

@@ -120,7 +120,7 @@ export default function AdsPage() {
                 <div className="flex justify-center">
                   <SimpleAdSlot
                     slotId={slot.id}
-                    size={slot.size as string}
+                    size={slot.size as "square" | "banner" | "mobile" | "sidebar"}
                     price={slot.price}
                     className="border-2 border-dashed border-gray-300 rounded-lg"
                   />
