@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-01-08
+
+### Added
+- **New Ad Slot Sizes**: Card (300x200) and Leaderboard (970x90) formats
+- **Enhanced Theme Customization**: 
+  - Hover states with `hoverBackgroundColor` and `hoverTextColor`
+  - Secondary text color with `secondaryTextColor`
+  - State colors: `successColor`, `warningColor`, `errorColor`
+  - Shadow effects with `shadowColor`
+  - Custom CSS styling with `customStyles` object
+- **Multiple Wallet Providers**: MetaMask, Coinbase Wallet, WalletConnect, and Injected wallets
+- **Multi-Network Support**: Base, Base Sepolia, Mainnet, and Sepolia networks
+- **Enhanced Error Handling**: 
+  - Request timeouts (10s for ad data, 5s for queue info)
+  - Better error categorization (Network, CORS, Timeout, Server errors)
+  - Graceful fallbacks for network/CORS errors
+  - Detailed error messages for debugging
+- **Advanced Examples**: New advanced usage example showcasing all features
+- **Improved API Resilience**: Better handling of API unavailability with fallback to empty slots
+
+### Changed
+- **Enhanced Error Components**: Now use theme colors for consistent styling
+- **Improved Fetch Logic**: Added AbortController for proper request cancellation
+- **Better User Experience**: Network errors show empty slots instead of error states
+- **Updated Default Theme**: Enhanced with new color options and better visual hierarchy
+- **Enhanced Payment Configuration**: Support for multiple tokens and networks
+
+### Technical Details
+- Updated type definitions for new theme properties and ad sizes
+- Enhanced AdProvider with multiple wallet connectors and network support
+- Improved AdSlot component with better error handling and theme integration
+- Added comprehensive examples for all new features
+- Updated package version to 1.2.0 with enhanced description
+
 ## [1.1.0] - 2025-01-08
 
 ### Added

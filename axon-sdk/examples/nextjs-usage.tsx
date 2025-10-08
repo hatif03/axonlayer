@@ -98,6 +98,44 @@ export function NextJSAdExample() {
             />
           </AdProvider>
         </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Card Ad</h2>
+          <AdProvider 
+            config={config}
+            onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+            walletConnectProjectId={process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID}
+          >
+            <AdSlot
+              slotId="card-001"
+              size="card"
+              price="0.08"
+              durations={['1h', '6h', '24h']}
+              category="technology"
+              clickable={true}
+              onSlotClick={(slotId) => console.log('Card clicked:', slotId)}
+            />
+          </AdProvider>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Leaderboard Ad</h2>
+          <AdProvider 
+            config={config}
+            onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+            walletConnectProjectId={process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID}
+          >
+            <AdSlot
+              slotId="leaderboard-001"
+              size="leaderboard"
+              price="0.15"
+              durations={['6h', '24h', '7d']}
+              category="general"
+              clickable={true}
+              onSlotClick={(slotId) => console.log('Leaderboard clicked:', slotId)}
+            />
+          </AdProvider>
+        </div>
       </div>
 
       <div className="mt-8 bg-blue-50 p-6 rounded-lg">

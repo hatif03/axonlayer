@@ -38,7 +38,7 @@
     "@types/uuid": "^10.0.0",
     "@web3modal/wagmi": "^5.1.11",
     "autoprefixer": "^10.4.20",
-    "axon-sdk": "^1.1.0",
+    "axon-sdk": "^1.2.0",
     "bls-eth-wasm": "^1.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

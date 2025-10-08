@@ -3,19 +3,21 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { AdConfig, AdContextType, AdError } from '../types';
 import { WagmiProvider, createConfig, http } from 'wagmi';
-import { base, baseSepolia } from 'wagmi/chains';
-import { coinbaseWallet, walletConnect } from 'wagmi/connectors';
+import { base, baseSepolia, mainnet, sepolia } from 'wagmi/chains';
+import { coinbaseWallet, walletConnect, metaMask, injected } from 'wagmi/connectors';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { OnchainKitProvider } from '@coinbase/onchainkit';
 
-// Create wagmi config with Base networks
+// Create wagmi config with multiple networks and wallet providers
 const createWagmiConfig = (walletConnectProjectId?: string) => createConfig({
-  chains: [base, baseSepolia],
+  chains: [base, baseSepolia, mainnet, sepolia],
   connectors: [
     coinbaseWallet({
       appName: 'Ad Platform',
       appLogoUrl: 'https://axonlayer.com/logo.png',
     }),
+    metaMask(),
+    injected(),
     ...(walletConnectProjectId ? [walletConnect({
       projectId: walletConnectProjectId,
     })] : []),
@@ -24,6 +26,8 @@ const createWagmiConfig = (walletConnectProjectId?: string) => createConfig({
   transports: {
     [base.id]: http(),
     [baseSepolia.id]: http(),
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
   },
 });
 
@@ -83,10 +87,18 @@ export const AdProvider: React.FC<{
       textColor: '#000000',
       borderColor: '#e5e5e5',
       fontFamily: 'JetBrains Mono, monospace',
-      borderRadius: 0
+      borderRadius: 0,
+      hoverBackgroundColor: '#f5f5f5',
+      hoverTextColor: '#000000',
+      secondaryTextColor: '#666666',
+      successColor: '#10b981',
+      warningColor: '#f59e0b',
+      errorColor: '#ef4444',
+      shadowColor: 'rgba(0, 0, 0, 0.1)',
+      customStyles: {}
     },
     payment: {
-      networks: ['base', 'base-sepolia'],
+      networks: ['base', 'base-sepolia', 'mainnet', 'sepolia'],
       defaultNetwork: 'base',
       recipientAddress: config.walletAddress,
       supportedTokens: [
@@ -94,6 +106,18 @@ export const AdProvider: React.FC<{
           symbol: 'USDC',
           address: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913', // Base USDC
           decimals: 6,
+          chainId: 8453
+        },
+        {
+          symbol: 'USDC',
+          address: '0xA0b86a33E6441b8C4C8C0C4C0C4C0C4C0C4C0C4C', // Mainnet USDC
+          decimals: 6,
+          chainId: 1
+        },
+        {
+          symbol: 'ETH',
+          address: '0x0000000000000000000000000000000000000000', // Native ETH
+          decimals: 18,
           chainId: 8453
         }
       ],

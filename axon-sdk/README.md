@@ -1,17 +1,19 @@
 # Axon SDK
 
-A React SDK for building onchain advertising platforms with Base network integration and OnchainKit.
+A React SDK for building onchain advertising platforms with enhanced error handling, multiple wallet providers, and advanced theme customization.
 
 ## Features
 
-- 🚀 **Base Network Integration**: Built for Base mainnet and testnet
+- 🚀 **Multi-Network Support**: Base, Base Sepolia, Mainnet, and Sepolia networks
 - 💳 **OnchainKit Integration**: Seamless wallet connection and transaction handling
-- 🎨 **Customizable UI**: Theme support for ad slots and components
-- 🔗 **Wallet Support**: Coinbase Wallet and WalletConnect integration
+- 🎨 **Advanced Theme Customization**: Hover states, custom colors, and CSS styling
+- 🔗 **Multiple Wallet Providers**: MetaMask, Coinbase Wallet, WalletConnect, and Injected wallets
 - ⚡ **Gas-Free Transactions**: Paymaster integration for sponsored transactions
-- 📱 **Responsive Design**: Mobile-friendly ad slot components
+- 📱 **Responsive Design**: Mobile-friendly ad slot components with new size options
 - 🎯 **TypeScript**: Full TypeScript support with comprehensive types
 - 🌐 **RESTful API**: Clean API endpoints for seamless integration
+- 🛡️ **Enhanced Error Handling**: Timeout, retry logic, and graceful fallbacks
+- 📏 **New Ad Sizes**: Card (300x200) and Leaderboard (970x90) formats
 
 ## Installation
 
@@ -30,12 +32,23 @@ function App() {
     walletAddress: '0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6',
     apiBaseUrl: 'https://api.axonlayer.com',
     theme: {
-      primaryColor: '#000000',
+      primaryColor: '#0052FF',
       backgroundColor: '#ffffff',
-      textColor: '#000000',
-      borderColor: '#e5e5e5',
-      fontFamily: 'JetBrains Mono, monospace',
-      borderRadius: 0
+      textColor: '#1a1a1a',
+      borderColor: '#e1e5e9',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      borderRadius: 12,
+      hoverBackgroundColor: '#f8fafc',
+      hoverTextColor: '#0052FF',
+      secondaryTextColor: '#64748b',
+      successColor: '#10b981',
+      warningColor: '#f59e0b',
+      errorColor: '#ef4444',
+      shadowColor: 'rgba(0, 82, 255, 0.1)',
+      customStyles: {
+        'boxShadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+      }
     }
   };
 
@@ -87,6 +100,52 @@ Displays ad slots with wallet connection and transaction capabilities.
   clickable={true}
   onSlotClick={(slotId) => console.log('Slot clicked:', slotId)}
 />
+```
+
+## Ad Slot Sizes
+
+The SDK supports multiple ad slot sizes:
+
+- **Banner**: 728x90 pixels (standard banner)
+- **Square**: 300x250 pixels (medium rectangle)
+- **Mobile**: 320x60 pixels (mobile banner)
+- **Sidebar**: 160x600 pixels (skyscraper)
+- **Card**: 300x200 pixels (content card) - *New in v1.2.0*
+- **Leaderboard**: 970x90 pixels (wide banner) - *New in v1.2.0*
+
+## Enhanced Theme Options
+
+Version 1.2.0 introduces advanced theme customization:
+
+```tsx
+theme: {
+  // Basic colors
+  primaryColor: '#0052FF',
+  backgroundColor: '#ffffff',
+  textColor: '#1a1a1a',
+  borderColor: '#e1e5e9',
+  
+  // Interactive states
+  hoverBackgroundColor: '#f8fafc',
+  hoverTextColor: '#0052FF',
+  
+  // Text hierarchy
+  secondaryTextColor: '#64748b',
+  
+  // State colors
+  successColor: '#10b981',
+  warningColor: '#f59e0b',
+  errorColor: '#ef4444',
+  
+  // Visual effects
+  shadowColor: 'rgba(0, 82, 255, 0.1)',
+  
+  // Custom CSS
+  customStyles: {
+    'boxShadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+    'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  }
+}
 ```
 
 ## Configuration

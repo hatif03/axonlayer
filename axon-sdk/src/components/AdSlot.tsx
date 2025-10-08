@@ -10,7 +10,9 @@ const SLOT_DIMENSIONS = {
   banner: { width: 728, height: 90 },
   square: { width: 300, height: 250 },
   mobile: { width: 320, height: 60 },
-  sidebar: { width: 160, height: 600 }
+  sidebar: { width: 160, height: 600 },
+  card: { width: 300, height: 200 },
+  leaderboard: { width: 970, height: 90 }
 };
 
 // Default font sizes based on slot dimensions
@@ -40,17 +42,20 @@ const DefaultLoadingComponent: React.FC = () => (
 );
 
 // Default error component
-const DefaultErrorComponent: React.FC<{ error: AdError }> = ({ error }) => (
+const DefaultErrorComponent: React.FC<{ error: AdError; theme?: any }> = ({ error, theme }) => (
   <div style={{
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
-    fontFamily: 'JetBrains Mono, monospace',
+    fontFamily: theme?.fontFamily || 'JetBrains Mono, monospace',
     fontSize: '10px',
-    color: '#c00',
+    color: theme?.errorColor || '#c00',
     textAlign: 'center',
-    padding: '8px'
+    padding: '8px',
+    backgroundColor: theme?.backgroundColor || '#ffffff',
+    border: `1px solid ${theme?.borderColor || '#e5e5e5'}`,
+    borderRadius: theme?.borderRadius || 0
   }}>
     Error: {error.message}
   </div>
@@ -92,12 +97,14 @@ const DefaultEmptySlotComponent: React.FC<{
       }}
       onMouseEnter={(e) => {
         if (clickable) {
-          e.currentTarget.style.backgroundColor = '#f5f5f5';
+          e.currentTarget.style.backgroundColor = theme.hoverBackgroundColor || '#f5f5f5';
+          e.currentTarget.style.color = theme.hoverTextColor || theme.textColor;
         }
       }}
       onMouseLeave={(e) => {
         if (clickable) {
           e.currentTarget.style.backgroundColor = theme.backgroundColor;
+          e.currentTarget.style.color = theme.textColor;
         }
       }}
     >
@@ -105,7 +112,7 @@ const DefaultEmptySlotComponent: React.FC<{
       <div style={{ fontSize: fontSizes.title, fontWeight: '600', marginBottom: '1px', lineHeight: '1.1' }}>
         Ad Slot: {slotId}
       </div>
-      <div style={{ fontSize: fontSizes.subtitle, marginBottom: '1px', lineHeight: '1.1', color: '#666' }}>
+      <div style={{ fontSize: fontSizes.subtitle, marginBottom: '1px', lineHeight: '1.1', color: theme.secondaryTextColor || '#666' }}>
         {price} USDC • {size}
       </div>
       {queueInfo && !queueInfo.isAvailable && (
@@ -113,7 +120,7 @@ const DefaultEmptySlotComponent: React.FC<{
           {queueInfo.totalInQueue} in queue
         </div>
       )}
-      <div style={{ fontSize: fontSizes.small, marginBottom: '1px', lineHeight: '1.1', color: '#666' }}>
+      <div style={{ fontSize: fontSizes.small, marginBottom: '1px', lineHeight: '1.1', color: theme.secondaryTextColor || '#666' }}>
         Base USDC
       </div>
       {!isConnected && (
@@ -122,7 +129,7 @@ const DefaultEmptySlotComponent: React.FC<{
         </div>
       )}
       {isConnected && clickable && (
-        <div style={{ fontSize: fontSizes.small, lineHeight: '1.1', color: '#666' }}>
+        <div style={{ fontSize: fontSizes.small, lineHeight: '1.1', color: theme.secondaryTextColor || '#666' }}>
           {queueInfo && !queueInfo.isAvailable ? 'Click to bid' : 'Click to purchase'}
         </div>
       )}
@@ -160,15 +167,47 @@ export const AdSlot: React.FC<AdSlotProps> = ({
   const slotDimensions = customDimensions || SLOT_DIMENSIONS[size as keyof typeof SLOT_DIMENSIONS];
   const fontSizes = getOptimalFontSizes(slotDimensions.width, slotDimensions.height);
 
-  // Fetch ad data
+  // Fetch ad data with improved error handling
   const fetchAdData = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch(`${apiBaseUrl}/api/ads/${slotId}`);
+      // Add timeout and retry logic
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      const response = await fetch(`${apiBaseUrl}/api/ads/${slotId}`, {
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
-        throw new Error(`Failed to fetch ad data: ${response.status}`);
+        if (response.status === 404) {
+          // No ad found - this is not an error, just empty slot
+          setAdData({ hasAd: false });
+          return;
+        }
+        
+        if (response.status >= 500) {
+          throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        }
+        
+        if (response.status === 403) {
+          throw new Error('Access forbidden - check your API configuration');
+        }
+        
+        if (response.status === 0) {
+          // CORS or network issue
+          throw new Error('Network error - check your API endpoint and CORS configuration');
+        }
+        
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
@@ -178,30 +217,73 @@ export const AdSlot: React.FC<AdSlotProps> = ({
         onAdLoad(data);
       }
     } catch (err) {
+      let errorMessage = 'Failed to fetch ad data';
+      let errorCode = 'FETCH_ERROR';
+
+      if (err instanceof Error) {
+        if (err.name === 'AbortError') {
+          errorMessage = 'Request timeout - please check your connection';
+          errorCode = 'TIMEOUT_ERROR';
+        } else if (err.message.includes('Failed to fetch')) {
+          errorMessage = 'Network error - please check your internet connection';
+          errorCode = 'NETWORK_ERROR';
+        } else if (err.message.includes('CORS')) {
+          errorMessage = 'CORS error - API server configuration issue';
+          errorCode = 'CORS_ERROR';
+        } else {
+          errorMessage = err.message;
+        }
+      }
+
+      // For network errors, show empty slot instead of error
+      if (errorCode === 'NETWORK_ERROR' || errorCode === 'CORS_ERROR') {
+        console.warn('API not available, showing empty slot:', errorMessage);
+        setAdData({ hasAd: false });
+        return;
+      }
+
       const error: AdError = {
-        code: 'FETCH_ERROR',
-        message: err instanceof Error ? err.message : 'Failed to fetch ad data',
+        code: errorCode,
+        message: errorMessage,
         details: err
       };
       setError(error);
+      
       if (onAdError) {
-        onAdError(err instanceof Error ? err : new Error('Failed to fetch ad data'));
+        onAdError(err instanceof Error ? err : new Error(errorMessage));
       }
     } finally {
       setIsLoading(false);
     }
   }, [apiBaseUrl, slotId, onAdLoad, onAdError]);
 
-  // Fetch queue info
+  // Fetch queue info with improved error handling
   const fetchQueueInfo = useCallback(async () => {
     try {
-      const response = await fetch(`${apiBaseUrl}/api/queue-info/${slotId}`);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout for queue info
+
+      const response = await fetch(`${apiBaseUrl}/api/queue-info/${slotId}`, {
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      });
+
+      clearTimeout(timeoutId);
+
       if (response.ok) {
         const data = await response.json();
         setQueueInfo(data);
+      } else if (response.status !== 404) {
+        // 404 is expected if no queue exists, other errors should be logged
+        console.warn(`Queue info fetch failed: ${response.status} ${response.statusText}`);
       }
     } catch (err) {
-      console.warn('Failed to fetch queue info:', err);
+      if (err instanceof Error && err.name !== 'AbortError') {
+        console.warn('Failed to fetch queue info:', err.message);
+      }
     }
   }, [apiBaseUrl, slotId]);
 
@@ -288,7 +370,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
           margin: '0 auto'
         }}
       >
-        {errorComponent || <DefaultErrorComponent error={error} />}
+        {errorComponent || <DefaultErrorComponent error={error} theme={config.theme} />}
       </div>
     );
   }

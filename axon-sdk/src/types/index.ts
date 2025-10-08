@@ -21,7 +21,7 @@ export interface AdSlotConfig {
   /** Unique identifier for the ad slot */
   slotId: string;
   /** Size of the ad slot */
-  size: 'banner' | 'square' | 'mobile' | 'sidebar';
+  size: 'banner' | 'square' | 'mobile' | 'sidebar' | 'card' | 'leaderboard';
   /** Base price in USDC */
   price: string;
   /** Available duration options */
@@ -53,14 +53,30 @@ export interface AdTheme {
   fontFamily?: string;
   /** Border radius (default: 0) */
   borderRadius?: number;
+  /** Hover background color */
+  hoverBackgroundColor?: string;
+  /** Hover text color */
+  hoverTextColor?: string;
+  /** Secondary text color for subtitles */
+  secondaryTextColor?: string;
+  /** Success color for positive states */
+  successColor?: string;
+  /** Warning color for caution states */
+  warningColor?: string;
+  /** Error color for error states */
+  errorColor?: string;
+  /** Shadow color for depth */
+  shadowColor?: string;
+  /** Custom CSS styles */
+  customStyles?: Record<string, string>;
 }
 
 // Payment Configuration
 export interface PaymentConfig {
   /** Supported networks */
-  networks?: ('base' | 'base-sepolia')[];
+  networks?: ('base' | 'base-sepolia' | 'mainnet' | 'sepolia')[];
   /** Default network */
-  defaultNetwork?: 'base' | 'base-sepolia';
+  defaultNetwork?: 'base' | 'base-sepolia' | 'mainnet' | 'sepolia';
   /** Payment recipient address */
   recipientAddress?: string;
   /** Supported tokens */

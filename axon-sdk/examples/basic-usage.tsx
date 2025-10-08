@@ -92,6 +92,44 @@ export function BasicAdExample() {
           />
         </AdProvider>
       </div>
+
+      <div style={{ margin: '20px 0' }}>
+        <h2>Card Ad Slot</h2>
+        <AdProvider 
+          config={config}
+          onchainKitApiKey="your_onchainkit_api_key"
+          walletConnectProjectId="your_walletconnect_project_id"
+        >
+          <AdSlot
+            slotId="card-001"
+            size="card"
+            price="0.08"
+            durations={['1h', '6h', '24h']}
+            category="technology"
+            clickable={true}
+            onSlotClick={(slotId) => console.log('Card clicked:', slotId)}
+          />
+        </AdProvider>
+      </div>
+
+      <div style={{ margin: '20px 0' }}>
+        <h2>Leaderboard Ad Slot</h2>
+        <AdProvider 
+          config={config}
+          onchainKitApiKey="your_onchainkit_api_key"
+          walletConnectProjectId="your_walletconnect_project_id"
+        >
+          <AdSlot
+            slotId="leaderboard-001"
+            size="leaderboard"
+            price="0.15"
+            durations={['6h', '24h', '7d']}
+            category="general"
+            clickable={true}
+            onSlotClick={(slotId) => console.log('Leaderboard clicked:', slotId)}
+          />
+        </AdProvider>
+      </div>
     </div>
   );
 }

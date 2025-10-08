@@ -1,7 +1,7 @@
 {
   "name": "axon-sdk",
-  "version": "1.1.0",
-  "description": "A React SDK for onchain ad platforms with Base network integration",
+  "version": "1.2.0",
+  "description": "A React SDK for onchain ad platforms with enhanced error handling, multiple wallet providers, and advanced theme customization",
   "license": "MIT",
   "author": "hatif03",
   "main": "dist/index.js",
@@ -39,7 +39,13 @@
     "blockchain",
     "ads",
     "monetization",
-    "decentralized"
+    "decentralized",
+    "metamask",
+    "walletconnect",
+    "theme",
+    "customization",
+    "error-handling",
+    "typescript"
   ],
   "repository": {
     "type": "git",
