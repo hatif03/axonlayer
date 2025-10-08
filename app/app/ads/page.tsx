@@ -1,14 +1,19 @@
 'use client';
 
-// Removed OnchainKit imports for now
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
-import { SimpleAdSlot } from '../components/SimpleAdSlot';
+import { AdProvider, AdSlot } from 'axon-sdk';
 
 export default function AdsPage() {
   const { isConnected, address } = useAccount();
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [transactionStatus, setTransactionStatus] = useState<string>('');
+
+  const adConfig = {
+    websiteId: 'axonlayer-ads',
+    walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
+    apiBaseUrl: 'https://api.axonlayer.com'
+  };
 
   const adSlots = [
     {
@@ -59,7 +64,12 @@ export default function AdsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <AdProvider 
+      config={adConfig}
+      onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+      walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
+    >
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -118,7 +128,7 @@ export default function AdsPage() {
               {/* Ad Slot Preview */}
               <div className="mb-6">
                 <div className="flex justify-center">
-                  <SimpleAdSlot
+                  <AdSlot
                     slotId={slot.id}
                     size={slot.size as "square" | "banner" | "mobile" | "sidebar"}
                     price={slot.price}
@@ -291,5 +301,6 @@ export default function AdsPage() {
         </section>
       </main>
     </div>
+    </AdProvider>
   );
 }

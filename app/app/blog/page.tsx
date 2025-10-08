@@ -1,8 +1,18 @@
-import { AdProvider, AdSlot } from '../../components/Ad';
+import { AdProvider, AdSlot } from 'axon-sdk';
 
 export default function BlogDemo() {
+  const adConfig = {
+    websiteId: 'axonlayer-blog-demo',
+    walletAddress: '0x3c11A511598fFD31fE4f6E3BdABcC31D99C1bD10',
+    apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
   return (
-    <AdProvider publisherWallet="0x3c11A511598fFD31fE4f6E3BdABcC31D99C1bD10">
+    <AdProvider 
+      config={adConfig}
+      onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+      walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
+    >
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header Ad */}
         <div className="mb-8">

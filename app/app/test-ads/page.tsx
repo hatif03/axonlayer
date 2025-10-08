@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { AdSlot } from '@/components/AdSlot';
+import { AdProvider, AdSlot } from 'axon-sdk';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
@@ -24,6 +24,12 @@ interface AdSlot {
 export default function TestAdsPage() {
   const [slots, setSlots] = useState<AdSlot[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const adConfig = {
+    websiteId: 'axonlayer-test',
+    walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
+    apiBaseUrl: 'https://api.axonlayer.com'
+  };
 
   useEffect(() => {
     const fetchSlots = async () => {
@@ -82,7 +88,12 @@ export default function TestAdsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background py-8">
+    <AdProvider 
+      config={adConfig}
+      onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+      walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
+    >
+      <div className="min-h-screen bg-background py-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="mb-8">
           <h1 className="text-2xl font-mono font-bold text-foreground">Test Ad Slots</h1>
@@ -143,7 +154,7 @@ export default function TestAdsPage() {
                   <div className="mb-4">
                     <AdSlot
                       slotId={slot.id}
-                      size={slot.size as "card" | "square" | "banner" | "mobile" | "sidebar" | "leaderboard"}
+                      size={slot.size as "square" | "banner" | "mobile" | "sidebar"}
                       price={slot.basePrice}
                       durations={slot.durationOptions}
                       category={slot.category}
@@ -161,5 +172,6 @@ export default function TestAdsPage() {
         )}
       </div>
     </div>
+    </AdProvider>
   );
 }

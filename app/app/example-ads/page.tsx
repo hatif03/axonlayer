@@ -1,12 +1,23 @@
 'use client';
 
 import React from 'react';
-import { AdSlot } from '@/components/AdSlot';
+import { AdProvider, AdSlot } from 'axon-sdk';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ExampleAdsPage() {
+  const adConfig = {
+    websiteId: 'axonlayer-examples',
+    walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
+    apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
   return (
-    <div className="min-h-screen bg-background p-4">
+    <AdProvider 
+      config={adConfig}
+      onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+      walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
+    >
+      <div className="min-h-screen bg-background p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -110,7 +121,7 @@ export default function ExampleAdsPage() {
               <CardContent>
                 <AdSlot
                   slotId="card-001"
-                  size="card"
+                  size="square"
                   price="0.20"
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
@@ -129,7 +140,7 @@ export default function ExampleAdsPage() {
               <CardContent>
                 <AdSlot
                   slotId="leaderboard-001"
-                  size="leaderboard"
+                  size="banner"
                   price="0.18"
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
@@ -234,5 +245,6 @@ export default function ExampleAdsPage() {
         </div>
       </div>
     </div>
+    </AdProvider>
   );
 }

@@ -1,10 +1,20 @@
-import { AdProvider, AdSlot } from "../components/Ad";
+import { AdProvider, AdSlot } from "axon-sdk";
 import { OnchainKitIdentity } from "../components/OnchainKitIdentity";
 import Link from "next/link";
 
 const Home = () => {
+  const adConfig = {
+    websiteId: 'axonlayer-demo',
+    walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
+    apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
   return (
-    <AdProvider publisherWallet="0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32">
+    <AdProvider 
+      config={adConfig}
+      onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+      walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
+    >
       <main className="min-h-screen bg-background">
         {/* Wallet Connection */}
         <div className="flex justify-end p-4">
