@@ -190,7 +190,7 @@ export const generateUploadUrl = (
  */
 export const fetchAdData = async (
   slotId: string,
-  apiBaseUrl: string = 'https://ad402.io'
+  apiBaseUrl: string = 'https://ad.io'
 ): Promise<AdData> => {
   const response = await fetch(`${apiBaseUrl}/api/ads/${slotId}`);
   
@@ -206,7 +206,7 @@ export const fetchAdData = async (
  */
 export const fetchQueueInfo = async (
   slotId: string,
-  apiBaseUrl: string = 'https://ad402.io'
+  apiBaseUrl: string = 'https://ad.io'
 ): Promise<QueueInfo> => {
   const response = await fetch(`${apiBaseUrl}/api/queue-info/${slotId}`);
   
@@ -220,7 +220,7 @@ export const fetchQueueInfo = async (
 /**
  * Create a custom hook for ad data
  */
-export const createAdDataHook = (slotId: string, apiBaseUrl: string = 'https://ad402.io') => {
+export const createAdDataHook = (slotId: string, apiBaseUrl: string = 'https://ad.io') => {
   return {
     fetchAdData: () => fetchAdData(slotId, apiBaseUrl),
     fetchQueueInfo: () => fetchQueueInfo(slotId, apiBaseUrl)

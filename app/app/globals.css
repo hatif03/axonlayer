@@ -1,26 +1,106 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* AxonLayer Color Palette: Bright Red, Black, White */
+    --background: 0 0% 100%; /* Pure white */
+    --foreground: 0 0% 0%; /* Pure black */
+    --card: 0 0% 100%; /* Pure white */
+    --card-foreground: 0 0% 0%; /* Pure black */
+    --popover: 0 0% 100%; /* Pure white */
+    --popover-foreground: 0 0% 0%; /* Pure black */
+    --primary: 0 100% 60%; /* Bright red #ff3131 */
+    --primary-foreground: 0 0% 100%; /* Pure white */
+    --secondary: 0 0% 96%; /* Light gray */
+    --secondary-foreground: 0 0% 0%; /* Pure black */
+    --muted: 0 0% 96%; /* Light gray */
+    --muted-foreground: 0 0% 45%; /* Medium gray */
+    --accent: 0 100% 60%; /* Bright red #ff3131 */
+    --accent-foreground: 0 0% 100%; /* Pure white */
+    --destructive: 0 100% 60%; /* Bright red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* Pure white */
+    --border: 0 0% 90%; /* Light gray border */
+    --input: 0 0% 96%; /* Light gray input background */
+    --ring: 0 100% 60%; /* Bright red focus ring */
+    --radius: 0px; /* No border radius for sharp edges */
+    --chart-1: 0 100% 60%; /* Bright red */
+    --chart-2: 0 0% 0%; /* Pure black */
+    --chart-3: 0 0% 25%; /* Dark gray */
+    --chart-4: 0 0% 50%; /* Medium gray */
+    --chart-5: 0 0% 75%; /* Light gray */
+  }
+
+  .dark {
+    /* Dark mode with AxonLayer colors */
+    --background: 0 0% 0%; /* Pure black */
+    --foreground: 0 0% 100%; /* Pure white */
+    --card: 0 0% 5%; /* Very dark gray */
+    --card-foreground: 0 0% 100%; /* Pure white */
+    --popover: 0 0% 5%; /* Very dark gray */
+    --popover-foreground: 0 0% 100%; /* Pure white */
+    --primary: 0 100% 60%; /* Bright red #ff3131 */
+    --primary-foreground: 0 0% 100%; /* Pure white */
+    --secondary: 0 0% 10%; /* Dark gray */
+    --secondary-foreground: 0 0% 100%; /* Pure white */
+    --muted: 0 0% 10%; /* Dark gray */
+    --muted-foreground: 0 0% 65%; /* Light gray */
+    --accent: 0 100% 60%; /* Bright red #ff3131 */
+    --accent-foreground: 0 0% 100%; /* Pure white */
+    --destructive: 0 100% 60%; /* Bright red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* Pure white */
+    --border: 0 0% 15%; /* Dark gray border */
+    --input: 0 0% 10%; /* Dark gray input background */
+    --ring: 0 100% 60%; /* Bright red focus ring */
+    --chart-1: 0 100% 60%; /* Bright red */
+    --chart-2: 0 0% 100%; /* Pure white */
+    --chart-3: 0 0% 75%; /* Light gray */
+    --chart-4: 0 0% 50%; /* Medium gray */
+    --chart-5: 0 0% 25%; /* Dark gray */
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+  }
+  
+  /* Ensure all text elements use monospaced font */
+  h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, select {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  
+  /* Sharp edges for all elements */
+  * {
+    border-radius: 0 !important;
+  }
+  
+  /* Press Start 2P font for AxonLayer branding */
+  .press-start-2p-regular {
+    font-family: "Press Start 2P", "Courier New", monospace, system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    line-height: 1.2;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

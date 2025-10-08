@@ -250,7 +250,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     return (
       <div
         ref={slotRef}
-        className={`ad402-slot ${className}`}
+        className={`ad-slot ${className}`}
         style={{
           width: slotDimensions.width,
           height: slotDimensions.height,
@@ -274,7 +274,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
     return (
       <div
         ref={slotRef}
-        className={`ad402-slot ${className}`}
+        className={`ad-slot ${className}`}
         style={{
           width: slotDimensions.width,
           height: slotDimensions.height,
@@ -299,7 +299,7 @@ export const AdSlot: React.FC<AdSlotProps> = ({
       <div style={{ position: 'relative', display: 'inline-block' }}>
         <div
           ref={slotRef}
-          className={`ad402-slot ${className}`}
+          className={`ad-slot ${className}`}
           style={{
             width: slotDimensions.width,
             height: slotDimensions.height,
