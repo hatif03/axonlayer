@@ -88,10 +88,10 @@ export default function AdsPage() {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Manage Your Ad Campaigns
+            Launch Your Next Ad Campaign
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Purchase and manage advertisement slots with Base network integration
+            Skip the ad networks. Buy premium ad space directly from publishers with gas-free Base USDC payments.
           </p>
         </div>
 
@@ -101,9 +101,9 @@ export default function AdsPage() {
             <div className="flex items-center">
               <span className="w-3 h-3 bg-yellow-400 rounded-full mr-3"></span>
               <div>
-                <h4 className="text-lg font-semibold text-yellow-800">Wallet Not Connected</h4>
+                <h4 className="text-lg font-semibold text-yellow-800">Connect Your Wallet</h4>
                 <p className="text-yellow-600">
-                  Please connect your wallet to purchase ad slots
+                  Connect your wallet to start purchasing premium ad slots with Base USDC
                 </p>
               </div>
             </div>
@@ -113,9 +113,9 @@ export default function AdsPage() {
             <div className="flex items-center">
               <span className="w-3 h-3 bg-green-400 rounded-full mr-3"></span>
               <div>
-                <h4 className="text-lg font-semibold text-green-800">Wallet Connected</h4>
+                <h4 className="text-lg font-semibold text-green-800">Ready to Advertise</h4>
                 <p className="text-green-600">
-                  Address: {address?.slice(0, 6)}...{address?.slice(-4)}
+                  Wallet: {address?.slice(0, 6)}...{address?.slice(-4)} • Base Network Ready
                 </p>
               </div>
             </div>
@@ -271,7 +271,7 @@ export default function AdsPage() {
         {/* Base Features Info */}
         <section className="mt-16 bg-white rounded-lg shadow-sm p-8">
           <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-            Why Choose Base for Advertising?
+            Why AxonLayer + Base = Advertising Revolution
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
@@ -280,7 +280,7 @@ export default function AdsPage() {
               </div>
               <h4 className="font-semibold text-gray-900 mb-2">Zero Gas Fees</h4>
               <p className="text-sm text-gray-600">
-                Transactions sponsored by Base network
+                Base network pays all transaction fees - keep 100% of your ad spend
               </p>
             </div>
             <div className="text-center">
@@ -289,25 +289,25 @@ export default function AdsPage() {
               </div>
               <h4 className="font-semibold text-gray-900 mb-2">Native USDC</h4>
               <p className="text-sm text-gray-600">
-                Direct USDC payments on Base
+                Pay with Base native USDC - no bridging, no delays, just instant payments
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <span className="text-xl">🛡️</span>
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Secure</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">Ethereum Security</h4>
               <p className="text-sm text-gray-600">
-                Built on Ethereum&apos;s security
+                Built on Ethereum's battle-tested security with Base's speed and efficiency
               </p>
             </div>
             <div className="text-center">
               <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                 <span className="text-xl">🚀</span>
               </div>
-              <h4 className="font-semibold text-gray-900 mb-2">Fast</h4>
+              <h4 className="font-semibold text-gray-900 mb-2">Lightning Fast</h4>
               <p className="text-sm text-gray-600">
-                2-second block times
+                2-second block times mean your ads go live almost instantly
               </p>
             </div>
           </div>

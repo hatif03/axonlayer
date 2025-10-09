@@ -64,8 +64,8 @@ const Home = () => {
               </h1>
             </div>
             <p className="text-xl font-mono mb-8 max-w-3xl mx-auto" style={{ color: '#ffffff' }}>
-              The future of decentralized advertising. Publishers get paid instantly, 
-              advertisers place ads directly without intermediaries.
+              Revolutionize digital advertising with gas-free transactions, instant payments, and zero intermediaries. 
+              Publishers earn more, advertisers pay less, everyone wins.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
@@ -175,9 +175,9 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Instant Payments</h3>
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Lightning-Fast Payments</h3>
               <p className="font-mono" style={{ color: '#ffffff' }}>
-                Publishers receive payments instantly using x402 protocol. No waiting periods or complex withdrawal processes.
+                Get paid instantly with Base network's sponsored transactions. No gas fees, no waiting, just pure profit flowing directly to your wallet.
               </p>
             </div>
             
@@ -187,9 +187,9 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>No Intermediaries</h3>
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Cut Out the Middleman</h3>
               <p className="font-mono" style={{ color: '#ffffff' }}>
-                Direct connection between publishers and advertisers. Lower fees, more transparency, better relationships.
+                Direct publisher-to-advertiser connections eliminate greedy ad networks. Keep 95%+ of your revenue instead of losing 30-50% to middlemen.
               </p>
             </div>
             
@@ -199,9 +199,9 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Real-time Analytics</h3>
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Live Performance Data</h3>
               <p className="font-mono" style={{ color: '#ffffff' }}>
-                Track views, clicks, and conversions in real-time. Get insights into your ad performance instantly.
+                Watch your earnings grow in real-time with transparent analytics. See every view, click, and conversion as it happens - no hidden metrics.
               </p>
             </div>
           </div>
@@ -214,9 +214,9 @@ const Home = () => {
                 <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   1
                 </div>
-                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Register Slots</h3>
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>List Your Space</h3>
                 <p className="text-sm font-mono" style={{ color: '#000000' }}>
-                  Publishers register ad slots on their websites with pricing and availability.
+                  Set your price, choose your terms, and watch advertisers compete for your premium ad space.
                 </p>
               </div>
               
@@ -224,9 +224,9 @@ const Home = () => {
                 <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   2
                 </div>
-                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Browse & Select</h3>
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Find Perfect Spots</h3>
                 <p className="text-sm font-mono" style={{ color: '#000000' }}>
-                  Advertisers browse available slots and select the ones that fit their needs.
+                  Advertisers discover high-quality ad spaces that match their target audience and budget perfectly.
                 </p>
               </div>
               
@@ -234,9 +234,9 @@ const Home = () => {
                 <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   3
                 </div>
-                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Pay & Place</h3>
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Pay & Upload</h3>
                 <p className="text-sm font-mono" style={{ color: '#000000' }}>
-                  Advertisers pay instantly using x402 and upload their ad content.
+                  One-click payment with Base USDC (gas-free!) and instant ad upload. Your campaign goes live in seconds.
                 </p>
               </div>
               
@@ -244,9 +244,9 @@ const Home = () => {
                 <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   4
                 </div>
-                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Go Live</h3>
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Start Earning</h3>
                 <p className="text-sm font-mono" style={{ color: '#000000' }}>
-                  Ads go live immediately and publishers start earning revenue.
+                  Your ad goes live instantly and money starts flowing to the publisher's wallet. No delays, no waiting.
                 </p>
               </div>
             </div>
@@ -254,9 +254,9 @@ const Home = () => {
 
           {/* CTA Section */}
           <div className="text-center p-12 border-2" style={{ backgroundColor: '#000000', borderColor: '#000000' }}>
-            <h2 className="text-3xl font-mono font-bold mb-4" style={{ color: '#ffffff' }}>Ready to Get Started?</h2>
+            <h2 className="text-3xl font-mono font-bold mb-4" style={{ color: '#ffffff' }}>Ready to Transform Your Revenue?</h2>
             <p className="text-xl mb-8 font-mono" style={{ color: '#ffffff' }}>
-              Join the decentralized advertising revolution today.
+              Stop losing money to ad networks. Start earning what you deserve with AxonLayer.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 

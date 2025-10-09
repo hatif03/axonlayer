@@ -37,17 +37,17 @@ export default function ExampleAdsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-mono font-bold text-foreground mb-2">
-            Ad Slot Examples
+            Live Ad Slot Showcase
           </h1>
           <p className="text-muted-foreground font-mono text-sm">
-            See how ad slots look with and without ads
+            Experience the power of AxonLayer - click any slot to purchase and see instant results
           </p>
         </div>
 
         {/* Available Slots Section */}
         <div className="mb-12">
           <h2 className="text-xl font-mono font-semibold text-foreground mb-4">
-            Available Ad Slots (Click to Purchase)
+            Premium Ad Slots - Click to Purchase & Go Live Instantly
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border-border bg-card">
@@ -175,38 +175,38 @@ export default function ExampleAdsPage() {
         {/* How It Works Section */}
         <div className="mb-8">
           <h2 className="text-xl font-mono font-semibold text-foreground mb-4">
-            How It Works
+            Why AxonLayer is the Future of Advertising
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">1. Purchase Slot</CardTitle>
+                <CardTitle className="font-mono text-sm">⚡ Instant Purchase</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Click on any available ad slot to purchase it with USDC on Polygon network.
+                  Click, pay with Base USDC (gas-free!), and your ad goes live in seconds. No waiting, no approvals.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">2. Upload Ad</CardTitle>
+                <CardTitle className="font-mono text-sm">🔒 Decentralized Storage</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  After payment, upload your ad image. It will be stored on IPFS for decentralized access.
+                  Your ad content is stored on IPFS - censorship-resistant, permanent, and globally accessible.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">3. Ad Goes Live</CardTitle>
+                <CardTitle className="font-mono text-sm">💰 Maximum Revenue</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Your ad will be displayed in the slot until the purchased duration expires.
+                  Publishers keep 95%+ of revenue. Advertisers pay 50% less. Everyone wins with AxonLayer.
                 </p>
               </CardContent>
             </Card>
@@ -216,49 +216,49 @@ export default function ExampleAdsPage() {
         {/* Features Section */}
         <div>
           <h2 className="text-xl font-mono font-semibold text-foreground mb-4">
-            Features
+            The AxonLayer Advantage
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">Decentralized Storage</CardTitle>
+                <CardTitle className="font-mono text-sm">🚀 Gas-Free Transactions</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Ads are stored on IPFS (InterPlanetary File System) for censorship-resistant, decentralized access.
+                  Base network sponsors all transactions. Pay with USDC, keep 100% of your ad spend - no hidden gas fees.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">Blockchain Payments</CardTitle>
+                <CardTitle className="font-mono text-sm">⚡ Instant Activation</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Secure payments using USDC on Polygon network with transparent transaction records.
+                  Your ad goes live the moment payment confirms. No waiting periods, no approval processes, just results.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">Multiple Sizes</CardTitle>
+                <CardTitle className="font-mono text-sm">📊 Real-Time Analytics</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Support for various ad formats: banner, square, mobile, sidebar, card, and leaderboard.
+                  Track every view, click, and conversion as it happens. Transparent data you can trust and act on.
                 </p>
               </CardContent>
             </Card>
 
             <Card className="border-border bg-card">
               <CardHeader>
-                <CardTitle className="font-mono text-sm">Flexible Duration</CardTitle>
+                <CardTitle className="font-mono text-sm">🌍 Global Reach</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-xs text-muted-foreground font-mono">
-                  Choose from multiple duration options: 30 minutes, 1 hour, 6 hours, or 24 hours.
+                  Accept payments from anywhere in the world. No geographic restrictions, no currency conversion fees.
                 </p>
               </CardContent>
             </Card>

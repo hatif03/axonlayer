@@ -53,16 +53,16 @@ export default function BlogDemo() {
         </div>
 
         <article className="prose lg:prose-xl">
-          <h1 className="text-4xl font-bold mb-6">The Future of Decentralized Advertising</h1>
+          <h1 className="text-4xl font-bold mb-6">The Death of Ad Networks: How AxonLayer is Revolutionizing Digital Advertising</h1>
           
           <p className="text-lg text-gray-700 mb-6">
-            Welcome to the future of web advertising where publishers get paid instantly and advertisers can place ads without intermediaries. 
-            The Ad-402 platform revolutionizes digital advertising by leveraging x402 payments for seamless, decentralized ad placements.
+            <strong>The ad industry is broken.</strong> Publishers lose 30-50% of their revenue to greedy middlemen. Advertisers pay premium prices for mediocre placements. 
+            AxonLayer changes everything with Base network's gas-free transactions and direct publisher-to-advertiser connections.
           </p>
           
           <p className="text-lg text-gray-700 mb-6">
-            Traditional advertising networks take significant cuts and have complex approval processes. With Ad-402, publishers can monetize 
-            their content instantly, and advertisers can place ads directly using cryptocurrency payments.
+            <strong>Imagine this:</strong> You publish content, set your ad price, and money flows directly to your wallet instantly. No Google AdSense delays. 
+            No Facebook approval processes. No 30% cuts to ad networks. Just pure, transparent revenue that you control completely.
           </p>
           
           {/* Mid-article ad */}
@@ -77,42 +77,43 @@ export default function BlogDemo() {
             />
           </div>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">How It Works</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">The AxonLayer Advantage: Why Traditional Ad Networks Are Dead</h2>
           
           <p className="text-lg text-gray-700 mb-4">
-            The Ad-402 platform uses a simple but powerful mechanism:
+            <strong>Here's the brutal truth:</strong> Traditional ad networks are dinosaurs. They're slow, expensive, and designed to extract maximum value from both publishers and advertisers. 
+            AxonLayer flips the script with a revolutionary approach:
           </p>
           
-          <ol className="list-decimal list-inside space-y-2 text-lg text-gray-700 mb-6">
-            <li>Publishers register ad slots on their websites</li>
-            <li>Advertisers browse available slots and place ads with instant payments</li>
-            <li>Ads are displayed immediately after payment confirmation</li>
-            <li>Publishers receive revenue instantly, minus a small platform fee</li>
+          <ol className="list-decimal list-inside space-y-3 text-lg text-gray-700 mb-6">
+            <li><strong>Publishers set their own prices</strong> - No more "market rates" that favor ad networks</li>
+            <li><strong>Advertisers pay instantly with Base USDC</strong> - Zero gas fees, immediate confirmation</li>
+            <li><strong>Ads go live in seconds</strong> - No approval processes, no waiting periods</li>
+            <li><strong>Publishers keep 95%+ of revenue</strong> - Compare that to Google's 32% cut</li>
           </ol>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">Benefits for Publishers</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">For Publishers: Finally, You're in Control</h2>
           
-          <ul className="list-disc list-inside space-y-2 text-lg text-gray-700 mb-6">
-            <li>Instant monetization of website traffic</li>
-            <li>No complex approval processes</li>
-            <li>Transparent pricing and revenue sharing</li>
-            <li>Direct relationship with advertisers</li>
-            <li>Global reach with cryptocurrency payments</li>
+          <ul className="list-disc list-inside space-y-3 text-lg text-gray-700 mb-6">
+            <li><strong>3x Higher Revenue</strong> - Keep 95%+ instead of losing 30-50% to ad networks</li>
+            <li><strong>Instant Payments</strong> - Money hits your wallet immediately, no 30-day delays</li>
+            <li><strong>Zero Approval Hassles</strong> - Set your price, get paid. No content restrictions or waiting periods</li>
+            <li><strong>Complete Transparency</strong> - See exactly who's paying and how much, every single transaction</li>
+            <li><strong>Global Reach</strong> - Accept payments from anywhere in the world with Base USDC</li>
           </ul>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">Benefits for Advertisers</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">For Advertisers: Cut Costs, Boost Results</h2>
           
-          <ul className="list-disc list-inside space-y-2 text-lg text-gray-700 mb-6">
-            <li>Direct ad placement without intermediaries</li>
-            <li>Instant ad activation after payment</li>
-            <li>Transparent pricing and placement</li>
-            <li>Global reach and targeting options</li>
-            <li>Real-time analytics and tracking</li>
+          <ul className="list-disc list-inside space-y-3 text-lg text-gray-700 mb-6">
+            <li><strong>50% Lower Costs</strong> - No ad network fees, no middleman markups, just direct publisher payments</li>
+            <li><strong>Instant Campaign Launch</strong> - Your ad goes live the moment you pay, no waiting for approvals</li>
+            <li><strong>Transparent Pricing</strong> - Know exactly what you're paying and where your ad appears</li>
+            <li><strong>Premium Placements</strong> - Access high-quality, engaged audiences without bidding wars</li>
+            <li><strong>Real-Time Performance</strong> - Track every view, click, and conversion as it happens</li>
           </ul>
 
           <p className="text-lg text-gray-700 mb-6">
-            The Ad-402 platform represents a paradigm shift in digital advertising, moving away from centralized control 
-            to a decentralized, transparent, and efficient system that benefits both publishers and advertisers.
+            <strong>The future is here, and it's decentralized.</strong> AxonLayer isn't just another ad platform - it's a complete revolution that puts power back in the hands of content creators and advertisers. 
+            No more feeding the ad network giants. No more waiting for payments. No more hidden fees. Just pure, transparent, profitable advertising that works for everyone.
           </p>
         </article>
 

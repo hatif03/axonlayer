@@ -133,8 +133,8 @@ export default function PublisherDashboard() {
     <div className="min-h-screen bg-background">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-mono font-bold text-foreground">AxonLayer Publisher Dashboard</h1>
-          <p className="text-muted-foreground mt-2 font-mono">Manage your ad slots and track performance</p>
+          <h1 className="text-3xl font-mono font-bold text-foreground">Your Revenue Command Center</h1>
+          <p className="text-muted-foreground mt-2 font-mono">Track earnings, manage ad slots, and watch your revenue grow in real-time</p>
         </div>
         
         {/* Stats Cards */}
@@ -147,7 +147,7 @@ export default function PublisherDashboard() {
                 </svg>
               </div>
               <div className="ml-4">
-                <h3 className="text-lg font-mono font-semibold text-card-foreground">Total Revenue</h3>
+                <h3 className="text-lg font-mono font-semibold text-card-foreground">Total Earnings</h3>
                 <p className="text-3xl font-mono font-bold text-foreground">
                   ${stats?.totalRevenue?.toFixed(2) || '0.00'}
                 </p>
@@ -163,7 +163,7 @@ export default function PublisherDashboard() {
                 </svg>
               </div>
               <div className="ml-4">
-                <h3 className="text-lg font-mono font-semibold text-card-foreground">Active Ads</h3>
+                <h3 className="text-lg font-mono font-semibold text-card-foreground">Live Campaigns</h3>
                 <p className="text-3xl font-mono font-bold text-foreground">
                   {stats?.activeAds || 0}
                 </p>
@@ -180,7 +180,7 @@ export default function PublisherDashboard() {
                 </svg>
               </div>
               <div className="ml-4">
-                <h3 className="text-lg font-mono font-semibold text-card-foreground">Total Views</h3>
+                <h3 className="text-lg font-mono font-semibold text-card-foreground">Total Impressions</h3>
                 <p className="text-3xl font-mono font-bold text-foreground">
                   {stats?.totalViews?.toLocaleString() || '0'}
                 </p>
@@ -286,24 +286,24 @@ export default function PublisherDashboard() {
         {/* Quick Actions */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-card p-6 border border-border shadow-sm">
-            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Create New Ad Slot</h3>
-            <p className="text-muted-foreground mb-4 font-mono">Add a new ad slot to your website to start earning revenue.</p>
+            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Add Revenue Stream</h3>
+            <p className="text-muted-foreground mb-4 font-mono">Create a new ad slot and start earning instantly from your website traffic.</p>
             <button className="w-full bg-primary text-primary-foreground py-2 px-4 hover:bg-primary/90 transition-colors font-mono">
               Create Slot
             </button>
           </div>
           
           <div className="bg-card p-6 border border-border shadow-sm">
-            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">View Analytics</h3>
-            <p className="text-muted-foreground mb-4 font-mono">Get detailed insights into your ad performance and revenue.</p>
+            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Performance Insights</h3>
+            <p className="text-muted-foreground mb-4 font-mono">Dive deep into your ad performance data and optimize for maximum revenue.</p>
             <button className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
               View Analytics
             </button>
           </div>
           
           <div className="bg-card p-6 border border-border shadow-sm">
-            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Withdraw Earnings</h3>
-            <p className="text-muted-foreground mb-4 font-mono">Withdraw your accumulated earnings to your wallet.</p>
+            <h3 className="text-lg font-mono font-semibold text-card-foreground mb-4">Cash Out Profits</h3>
+            <p className="text-muted-foreground mb-4 font-mono">Transfer your earnings directly to your wallet - no delays, no fees, just instant access to your money.</p>
             <button className="w-full bg-secondary text-secondary-foreground py-2 px-4 hover:bg-secondary/80 transition-colors font-mono">
               Withdraw
             </button>
