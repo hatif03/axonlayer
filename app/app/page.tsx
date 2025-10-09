@@ -177,7 +177,7 @@ const Home = () => {
               </div>
               <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Lightning-Fast Payments</h3>
               <p className="font-mono" style={{ color: '#ffffff' }}>
-                Get paid instantly with Base network's sponsored transactions. No gas fees, no waiting, just pure profit flowing directly to your wallet.
+                Get paid instantly with Base network&apos;s sponsored transactions. No gas fees, no waiting, just pure profit flowing directly to your wallet.
               </p>
             </div>
             
@@ -246,7 +246,7 @@ const Home = () => {
                 </div>
                 <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Start Earning</h3>
                 <p className="text-sm font-mono" style={{ color: '#000000' }}>
-                  Your ad goes live instantly and money starts flowing to the publisher's wallet. No delays, no waiting.
+                  Your ad goes live instantly and money starts flowing to the publisher&apos;s wallet. No delays, no waiting.
                 </p>
               </div>
             </div>

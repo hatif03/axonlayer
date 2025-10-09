@@ -298,7 +298,7 @@ export default function AdsPage() {
               </div>
               <h4 className="font-semibold text-gray-900 mb-2">Ethereum Security</h4>
               <p className="text-sm text-gray-600">
-                Built on Ethereum's battle-tested security with Base's speed and efficiency
+                Built on Ethereum&apos;s battle-tested security with Base&apos;s speed and efficiency
               </p>
             </div>
             <div className="text-center">

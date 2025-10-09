@@ -57,7 +57,7 @@ export default function BlogDemo() {
           
           <p className="text-lg text-gray-700 mb-6">
             <strong>The ad industry is broken.</strong> Publishers lose 30-50% of their revenue to greedy middlemen. Advertisers pay premium prices for mediocre placements. 
-            AxonLayer changes everything with Base network's gas-free transactions and direct publisher-to-advertiser connections.
+            AxonLayer changes everything with Base network&apos;s gas-free transactions and direct publisher-to-advertiser connections.
           </p>
           
           <p className="text-lg text-gray-700 mb-6">
@@ -80,24 +80,24 @@ export default function BlogDemo() {
           <h2 className="text-2xl font-bold mt-8 mb-4">The AxonLayer Advantage: Why Traditional Ad Networks Are Dead</h2>
           
           <p className="text-lg text-gray-700 mb-4">
-            <strong>Here's the brutal truth:</strong> Traditional ad networks are dinosaurs. They're slow, expensive, and designed to extract maximum value from both publishers and advertisers. 
+            <strong>Here&apos;s the brutal truth:</strong> Traditional ad networks are dinosaurs. They&apos;re slow, expensive, and designed to extract maximum value from both publishers and advertisers. 
             AxonLayer flips the script with a revolutionary approach:
           </p>
           
           <ol className="list-decimal list-inside space-y-3 text-lg text-gray-700 mb-6">
-            <li><strong>Publishers set their own prices</strong> - No more "market rates" that favor ad networks</li>
+            <li><strong>Publishers set their own prices</strong> - No more &quot;market rates&quot; that favor ad networks</li>
             <li><strong>Advertisers pay instantly with Base USDC</strong> - Zero gas fees, immediate confirmation</li>
             <li><strong>Ads go live in seconds</strong> - No approval processes, no waiting periods</li>
-            <li><strong>Publishers keep 95%+ of revenue</strong> - Compare that to Google's 32% cut</li>
+            <li><strong>Publishers keep 95%+ of revenue</strong> - Compare that to Google&apos;s 32% cut</li>
           </ol>
 
-          <h2 className="text-2xl font-bold mt-8 mb-4">For Publishers: Finally, You're in Control</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">For Publishers: Finally, You&apos;re in Control</h2>
           
           <ul className="list-disc list-inside space-y-3 text-lg text-gray-700 mb-6">
             <li><strong>3x Higher Revenue</strong> - Keep 95%+ instead of losing 30-50% to ad networks</li>
             <li><strong>Instant Payments</strong> - Money hits your wallet immediately, no 30-day delays</li>
             <li><strong>Zero Approval Hassles</strong> - Set your price, get paid. No content restrictions or waiting periods</li>
-            <li><strong>Complete Transparency</strong> - See exactly who's paying and how much, every single transaction</li>
+            <li><strong>Complete Transparency</strong> - See exactly who&apos;s paying and how much, every single transaction</li>
             <li><strong>Global Reach</strong> - Accept payments from anywhere in the world with Base USDC</li>
           </ul>
 
@@ -106,13 +106,13 @@ export default function BlogDemo() {
           <ul className="list-disc list-inside space-y-3 text-lg text-gray-700 mb-6">
             <li><strong>50% Lower Costs</strong> - No ad network fees, no middleman markups, just direct publisher payments</li>
             <li><strong>Instant Campaign Launch</strong> - Your ad goes live the moment you pay, no waiting for approvals</li>
-            <li><strong>Transparent Pricing</strong> - Know exactly what you're paying and where your ad appears</li>
+            <li><strong>Transparent Pricing</strong> - Know exactly what you&apos;re paying and where your ad appears</li>
             <li><strong>Premium Placements</strong> - Access high-quality, engaged audiences without bidding wars</li>
             <li><strong>Real-Time Performance</strong> - Track every view, click, and conversion as it happens</li>
           </ul>
 
           <p className="text-lg text-gray-700 mb-6">
-            <strong>The future is here, and it's decentralized.</strong> AxonLayer isn't just another ad platform - it's a complete revolution that puts power back in the hands of content creators and advertisers. 
+            <strong>The future is here, and it&apos;s decentralized.</strong> AxonLayer isn&apos;t just another ad platform - it&apos;s a complete revolution that puts power back in the hands of content creators and advertisers. 
             No more feeding the ad network giants. No more waiting for payments. No more hidden fees. Just pure, transparent, profitable advertising that works for everyone.
           </p>
         </article>
