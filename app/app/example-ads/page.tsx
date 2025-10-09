@@ -1,14 +1,29 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { AdProvider, AdSlot } from 'axon-sdk';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ExampleAdsPage() {
+  const router = useRouter();
+  
   const adConfig = {
     websiteId: 'axonlayer-examples',
     walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
     apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
+  const handleSlotClick = (slotId: string) => {
+    // For example ads, we'll use default values
+    const params = new URLSearchParams({
+      slotId: slotId,
+      price: '0.10',
+      size: 'banner',
+      durations: '30m,1h,6h,24h',
+      category: 'general'
+    });
+    router.push(`/checkout?${params.toString()}`);
   };
 
   return (
@@ -50,6 +65,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>
@@ -69,6 +85,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>
@@ -88,6 +105,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>
@@ -107,6 +125,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>
@@ -126,6 +145,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>
@@ -145,6 +165,7 @@ export default function ExampleAdsPage() {
                   durations={['30m', '1h', '6h', '24h']}
                   category="general"
                   clickable={true}
+                  onSlotClick={handleSlotClick}
                 />
               </CardContent>
             </Card>

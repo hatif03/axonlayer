@@ -19,6 +19,10 @@ A React SDK for building onchain advertising platforms with enhanced error handl
 
 ```bash
 npm install axon-sdk
+# or
+yarn add axon-sdk
+# or
+pnpm add axon-sdk
 ```
 
 ## Quick Start
@@ -199,4 +203,9 @@ Contributions are welcome! Please read our contributing guidelines and submit pu
 
 ## Support
 
-For support and questions, please open an issue on our GitHub repository.
+For support and questions:
+
+- 📖 [Documentation](https://github.com/hatif03/axonlayer)
+- 🐛 [Report Issues](https://github.com/hatif03/axonlayer/issues)
+- 💬 [Discord Community](https://discord.gg/axonlayer)
+- 📧 [Email Support](mailto:support@axonlayer.com)

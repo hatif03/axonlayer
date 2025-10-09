@@ -2,10 +2,12 @@
 
 import { useAccount } from 'wagmi';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { AdProvider, AdSlot } from 'axon-sdk';
 
 export default function AdsPage() {
   const { isConnected, address } = useAccount();
+  const router = useRouter();
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
   const [transactionStatus, setTransactionStatus] = useState<string>('');
 
@@ -51,8 +53,18 @@ export default function AdsPage() {
   ];
 
   const handleSlotClick = (slotId: string) => {
-    setSelectedSlot(slotId);
-    setTransactionStatus('preparing');
+    // Find the slot data to get price and other details
+    const slot = adSlots.find(s => s.id === slotId);
+    if (slot) {
+      const params = new URLSearchParams({
+        slotId: slot.id,
+        price: slot.price,
+        size: slot.size,
+        durations: '30m,1h,6h,24h',
+        category: 'general'
+      });
+      router.push(`/checkout?${params.toString()}`);
+    }
   };
 
   const handleTransactionComplete = (status: string) => {
@@ -133,6 +145,7 @@ export default function AdsPage() {
                     size={slot.size as "square" | "banner" | "mobile" | "sidebar"}
                     price={slot.price}
                     className="border-2 border-dashed border-gray-300 rounded-lg"
+                    onSlotClick={handleSlotClick}
                   />
                 </div>
               </div>

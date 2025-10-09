@@ -1,23 +1,29 @@
 # AxonLayer Frontend
 
-A Next.js frontend application built with OnchainKit and Base network integration for onchain advertising.
+A Next.js 15 frontend application built with OnchainKit and Base network integration for onchain advertising. This is the main frontend console for the AxonLayer advertising platform.
 
 ## Features
 
-- **Base Native Integration**: Built specifically for Base network with native USDC support
-- **Gas Sponsorship**: All transactions are sponsored by Base, eliminating gas fees
+- **Base Network Integration**: Built specifically for Base network with native USDC support
+- **Gas-Free Transactions**: All transactions are sponsored by Base network, eliminating gas fees
 - **OnchainKit Integration**: Seamless wallet connection and transaction management
-- **Ad Slot Management**: Purchase and manage advertisement slots
+- **Ad Slot Management**: Purchase and manage advertisement slots with competitive bidding
 - **Real-time Analytics**: Track ad performance and earnings
 - **Responsive Design**: Mobile-first design with Tailwind CSS
+- **IPFS Storage**: Decentralized storage for ad content via Lighthouse
+- **Multiple SDK Support**: Integration with both AxonLayer SDK and legacy Ad402 SDK
 
 ## Tech Stack
 
 - **Framework**: Next.js 15 with App Router
 - **Web3**: OnchainKit, Wagmi, Viem
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS with custom design system
 - **State Management**: React Query (TanStack Query)
-- **Ad SDK**: Custom AxonLayer SDK
+- **Ad SDKs**: AxonLayer SDK (main) and Ad402 SDK (legacy)
+- **Storage**: IPFS via Lighthouse
+- **Database**: Prisma with SQLite (development)
+- **UI Components**: Radix UI with custom styling
+- **Forms**: React Hook Form with Zod validation
 
 ## Getting Started
 
@@ -27,6 +33,9 @@ A Next.js frontend application built with OnchainKit and Base network integratio
 - npm or yarn
 - Base network RPC access
 - OnchainKit API key
+- WalletConnect Project ID
+- Lighthouse API key (for IPFS storage)
+- USDC on Base network for testing
 
 ### Installation
 
@@ -45,12 +54,20 @@ cp env.example .env.local
 3. Configure your environment variables in `.env.local`:
 
 ```env
+# OnchainKit Configuration
 NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_onchainkit_api_key_here
 NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id_here
+
+# API Configuration
 NEXT_PUBLIC_API_BASE_URL=https://api.axonlayer.com
 NEXT_PUBLIC_PAYMASTER_URL=https://paymaster.base.org
+
+# Publisher Configuration
 NEXT_PUBLIC_PUBLISHER_WALLET=0x1234567890123456789012345678901234567890
 NEXT_PUBLIC_WEBSITE_ID=axonlayer-demo
+
+# Lighthouse IPFS Storage
+LIGHTHOUSE_API_KEY=your_lighthouse_api_key_here
 ```
 
 4. Run the development server:
@@ -79,16 +96,42 @@ Base's 2-second block times ensure quick transaction confirmations and smooth us
 
 ```
 app/
-├── app/
-│   ├── components/
-│   │   └── Navigation.tsx          # Global navigation component
-│   ├── ads/
+├── app/                           # Next.js App Router
+│   ├── ads/                       # Ad management interface
 │   │   └── page.tsx               # Ad management page
-│   ├── dashboard/
-│   │   └── page.tsx               # User dashboard
+│   ├── blog/                      # Blog content
+│   │   └── page.tsx               # Blog page
+│   ├── checkout/                  # Payment & bidding interface
+│   │   └── page.tsx               # Checkout page
+│   ├── dashboard/                 # Publisher analytics
+│   │   └── page.tsx               # Dashboard page
+│   ├── example-ads/               # Demo ad slots
+│   │   └── page.tsx               # Example ads page
+│   ├── test-ads/                  # Testing interface
+│   │   └── page.tsx               # Test ads page
+│   ├── test-upload/               # Upload testing
+│   │   └── page.tsx               # Test upload page
+│   ├── upload/                    # Ad content upload
+│   │   └── page.tsx               # Upload page
+│   ├── components/                # Shared components
+│   │   └── [components].tsx       # Shared UI components
 │   ├── layout.tsx                 # Root layout with providers
 │   ├── page.tsx                   # Homepage with ad slot demos
 │   └── providers.tsx              # Web3 and ad providers
+├── components/                    # React Components
+│   ├── OnchainKitIdentity.tsx     # Identity display components
+│   ├── OnchainKitWallet.tsx      # Wallet connection components
+│   ├── WalletConnectModal.tsx     # Web3 wallet integration
+│   ├── ui/                        # UI component library
+│   └── [other-components].tsx     # Additional components
+├── lib/                           # Core Libraries
+│   ├── lighthouse.ts              # IPFS storage system
+│   ├── adService.ts               # Ad management services
+│   ├── usdc.ts                    # USDC payment utilities
+│   ├── walletUtils.ts             # Wallet utilities
+│   └── [other-utils].ts           # Additional utilities
+├── hooks/                         # Custom React hooks
+│   └── useSafeWallet.ts           # Safe wallet hook
 ├── env.example                    # Environment variables template
 └── README.md                      # This file
 ```
@@ -101,8 +144,9 @@ The `providers.tsx` file sets up all necessary providers:
 
 - **WagmiProvider**: For wallet connection and blockchain interactions
 - **QueryClientProvider**: For React Query state management
-- **OnchainKitProvider**: For Base network features
-- **AdProvider**: For ad platform functionality
+- **OnchainKitProvider**: For Base network features and gas sponsorship
+- **AdProvider**: For ad platform functionality (AxonLayer SDK)
+- **Ad402Provider**: For legacy ad platform functionality (Ad402 SDK)
 
 ### Ad Slots
 
@@ -112,6 +156,8 @@ The application includes several ad slot types:
 - **Square**: 300x250 square ads
 - **Mobile**: 320x60 mobile-optimized ads
 - **Sidebar**: 160x600 vertical sidebar ads
+- **Card**: 300x200 content card ads (AxonLayer SDK)
+- **Leaderboard**: 970x90 wide banner ads (AxonLayer SDK)
 
 ### Navigation
 
@@ -148,19 +194,36 @@ const createWagmiConfig = (walletConnectProjectId?: string) => createConfig({
 
 ## Ad Platform Integration
 
-The application integrates with the AxonLayer SDK for:
+The application integrates with multiple SDKs:
 
-- Ad slot management
-- Payment processing
+### AxonLayer SDK (Main)
+- Ad slot management with OnchainKit integration
+- Gas-free payment processing via Base network
+- Analytics tracking
+- Queue management with competitive bidding
+
+### Ad402 SDK (Legacy)
+- Legacy ad slot management
+- Traditional payment processing
 - Analytics tracking
 - Queue management
 
 ## Development
 
-### Running Tests
+### Database Management
 
 ```bash
-npm run test
+# Generate Prisma client
+npm run db:generate
+
+# Run database migrations
+npm run db:migrate
+
+# Open Prisma Studio
+npm run db:studio
+
+# Reset database
+npm run db:reset
 ```
 
 ### Building for Production
@@ -169,9 +232,13 @@ npm run test
 npm run build
 ```
 
-### Linting
+### Code Formatting
 
 ```bash
+# Format code with Prettier
+npm run format
+
+# Lint code
 npm run lint
 ```
 
@@ -183,7 +250,15 @@ The application is ready for deployment on:
 - Netlify
 - Any Node.js hosting platform
 
-Make sure to set all environment variables in your deployment platform.
+Make sure to set all environment variables in your deployment platform:
+
+- `NEXT_PUBLIC_ONCHAINKIT_API_KEY`
+- `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`
+- `LIGHTHOUSE_API_KEY`
+- `NEXT_PUBLIC_API_BASE_URL`
+- `NEXT_PUBLIC_PAYMASTER_URL`
+- `NEXT_PUBLIC_PUBLISHER_WALLET`
+- `NEXT_PUBLIC_WEBSITE_ID`
 
 ## Contributing
 

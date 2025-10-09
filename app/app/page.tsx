@@ -1,12 +1,37 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { AdProvider, AdSlot } from "axon-sdk";
 import { OnchainKitIdentity } from "../components/OnchainKitIdentity";
 import Link from "next/link";
 
 const Home = () => {
+  const router = useRouter();
+  
   const adConfig = {
     websiteId: 'axonlayer-demo',
     walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
     apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
+  const handleSlotClick = (slotId: string) => {
+    // For home page demo slots, we'll use default values based on slot type
+    const slotConfigs = {
+      'demo-header': { price: '0.25', size: 'banner', durations: '1h,6h,24h', category: 'demo' },
+      'demo-square': { price: '0.15', size: 'square', durations: '30m,1h,2h', category: 'demo' },
+      'demo-mobile': { price: '0.10', size: 'mobile', durations: '1h,6h,12h', category: 'demo' }
+    };
+    
+    const config = slotConfigs[slotId as keyof typeof slotConfigs] || { price: '0.10', size: 'banner', durations: '1h,6h,24h', category: 'demo' };
+    
+    const params = new URLSearchParams({
+      slotId: slotId,
+      price: config.price,
+      size: config.size,
+      durations: config.durations,
+      category: config.category
+    });
+    router.push(`/checkout?${params.toString()}`);
   };
 
   return (
@@ -15,7 +40,7 @@ const Home = () => {
       onchainKitApiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
       walletConnectProjectId={process.env.NEXT_PUBLIC_RAINBOWKIT_PROJECT_ID}
     >
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen" style={{ backgroundColor: '#ff3131' }}>
         {/* Wallet Connection */}
         <div className="flex justify-end p-4">
                 <OnchainKitIdentity />
@@ -24,33 +49,79 @@ const Home = () => {
         {/* Hero Section */}
         <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="text-center mb-16">
-            <h1 className="press-start-2p-regular mb-6" style={{ 
-              fontSize: '3rem', 
-              fontWeight: 'bold',
-              lineHeight: '1.2'
+            <div className="mb-6" style={{ 
+              backgroundColor: '#ffffff',
+              border: '4px solid #000000',
+              padding: '20px',
+              display: 'inline-block',
+              boxShadow: '8px 8px 0px #000000'
             }}>
-              <span style={{ color: '#ff3131' }}>axon</span><span style={{ color: '#000000' }}>layer</span>
-            </h1>
-            <p className="text-xl font-mono text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <h1 className="press-start-2p-regular" style={{ 
+                margin: 0,
+                padding: 0
+              }}>
+                <span style={{ color: '#ff3131' }}>axon</span><span style={{ color: '#000000' }}>layer</span>
+              </h1>
+            </div>
+            <p className="text-xl font-mono mb-8 max-w-3xl mx-auto" style={{ color: '#ffffff' }}>
               The future of decentralized advertising. Publishers get paid instantly, 
               advertisers place ads directly without intermediaries.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/blog" 
-                className="bg-primary text-primary-foreground px-8 py-3 hover:bg-primary/90 transition-colors font-mono"
+                className="px-8 py-3 transition-colors font-mono border-2"
+                style={{ 
+                  backgroundColor: '#000000', 
+                  color: '#ffffff',
+                  borderColor: '#000000'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#000000';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#000000';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
               >
                 View Demo Blog
               </Link>
               <Link 
                 href="/example-ads" 
-                className="bg-background text-foreground px-8 py-3 border border-border hover:bg-secondary transition-colors font-mono"
+                className="px-8 py-3 transition-colors font-mono border-2"
+                style={{ 
+                  backgroundColor: '#ffffff', 
+                  color: '#000000',
+                  borderColor: '#000000'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#000000';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#000000';
+                }}
               >
                 See Ad Examples
               </Link>
               <Link 
                 href="/dashboard" 
-                className="bg-background text-foreground px-8 py-3 border border-border hover:bg-secondary transition-colors font-mono"
+                className="px-8 py-3 transition-colors font-mono border-2"
+                style={{ 
+                  backgroundColor: '#ffffff', 
+                  color: '#000000',
+                  borderColor: '#000000'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#000000';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#000000';
+                }}
               >
                 Publisher Dashboard
               </Link>
@@ -59,36 +130,39 @@ const Home = () => {
 
           {/* Demo Ad Slots */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            <div className="bg-card p-6 border border-border shadow-sm">
-              <h3 className="text-lg font-mono font-semibold mb-4 text-card-foreground">Header Banner</h3>
+            <div className="p-6 border-2 shadow-sm" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+              <h3 className="text-lg font-mono font-semibold mb-4" style={{ color: '#000000' }}>Header Banner</h3>
               <AdSlot
                 slotId="demo-header"
                 size="banner"
                 price="0.25"
                 durations={['1h', '6h', '24h']}
                 category="demo"
+                onSlotClick={handleSlotClick}
               />
             </div>
             
-            <div className="bg-card p-6 border border-border shadow-sm">
-              <h3 className="text-lg font-mono font-semibold mb-4 text-card-foreground">Square Ad</h3>
+            <div className="p-6 border-2 shadow-sm" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+              <h3 className="text-lg font-mono font-semibold mb-4" style={{ color: '#000000' }}>Square Ad</h3>
               <AdSlot
                 slotId="demo-square"
                 size="square"
                 price="0.15"
                 durations={['30m', '1h', '2h']}
                 category="demo"
+                onSlotClick={handleSlotClick}
               />
             </div>
             
-            <div className="bg-card p-6 border border-border shadow-sm">
-              <h3 className="text-lg font-mono font-semibold mb-4 text-card-foreground">Mobile Banner</h3>
+            <div className="p-6 border-2 shadow-sm" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+              <h3 className="text-lg font-mono font-semibold mb-4" style={{ color: '#000000' }}>Mobile Banner</h3>
               <AdSlot
                 slotId="demo-mobile"
                 size="mobile"
                 price="0.10"
                 durations={['1h', '6h', '12h']}
                 category="demo"
+                onSlotClick={handleSlotClick}
               />
             </div>
           </div>
@@ -96,82 +170,82 @@ const Home = () => {
           {/* Features Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="text-center">
-              <div className="bg-secondary w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-border">
-                <svg className="w-8 h-8 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4 border-2" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#000000' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2 text-foreground">Instant Payments</h3>
-              <p className="text-muted-foreground font-mono">
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Instant Payments</h3>
+              <p className="font-mono" style={{ color: '#ffffff' }}>
                 Publishers receive payments instantly using x402 protocol. No waiting periods or complex withdrawal processes.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-secondary w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-border">
-                <svg className="w-8 h-8 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4 border-2" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#000000' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2 text-foreground">No Intermediaries</h3>
-              <p className="text-muted-foreground font-mono">
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>No Intermediaries</h3>
+              <p className="font-mono" style={{ color: '#ffffff' }}>
                 Direct connection between publishers and advertisers. Lower fees, more transparency, better relationships.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-secondary w-16 h-16 flex items-center justify-center mx-auto mb-4 border border-border">
-                <svg className="w-8 h-8 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 flex items-center justify-center mx-auto mb-4 border-2" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: '#000000' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-mono font-semibold mb-2 text-foreground">Real-time Analytics</h3>
-              <p className="text-muted-foreground font-mono">
+              <h3 className="text-xl font-mono font-semibold mb-2" style={{ color: '#ffffff' }}>Real-time Analytics</h3>
+              <p className="font-mono" style={{ color: '#ffffff' }}>
                 Track views, clicks, and conversions in real-time. Get insights into your ad performance instantly.
               </p>
             </div>
           </div>
 
           {/* How It Works */}
-          <div className="bg-card border border-border shadow-sm p-8 mb-16">
-            <h2 className="text-3xl font-mono font-bold text-center mb-8 text-card-foreground">How It Works</h2>
+          <div className="border-2 shadow-sm p-8 mb-16" style={{ backgroundColor: '#ffffff', borderColor: '#000000' }}>
+            <h2 className="text-3xl font-mono font-bold text-center mb-8" style={{ color: '#000000' }}>How It Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="bg-primary text-primary-foreground w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold">
+                <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   1
                 </div>
-                <h3 className="font-mono font-semibold mb-2 text-foreground">Register Slots</h3>
-                <p className="text-muted-foreground text-sm font-mono">
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Register Slots</h3>
+                <p className="text-sm font-mono" style={{ color: '#000000' }}>
                   Publishers register ad slots on their websites with pricing and availability.
                 </p>
               </div>
               
               <div className="text-center">
-                <div className="bg-primary text-primary-foreground w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold">
+                <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   2
                 </div>
-                <h3 className="font-mono font-semibold mb-2 text-foreground">Browse & Select</h3>
-                <p className="text-muted-foreground text-sm font-mono">
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Browse & Select</h3>
+                <p className="text-sm font-mono" style={{ color: '#000000' }}>
                   Advertisers browse available slots and select the ones that fit their needs.
                 </p>
               </div>
               
               <div className="text-center">
-                <div className="bg-primary text-primary-foreground w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold">
+                <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   3
                 </div>
-                <h3 className="font-mono font-semibold mb-2 text-foreground">Pay & Place</h3>
-                <p className="text-muted-foreground text-sm font-mono">
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Pay & Place</h3>
+                <p className="text-sm font-mono" style={{ color: '#000000' }}>
                   Advertisers pay instantly using x402 and upload their ad content.
                 </p>
               </div>
               
               <div className="text-center">
-                <div className="bg-primary text-primary-foreground w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold">
+                <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 text-xl font-mono font-bold border-2" style={{ backgroundColor: '#000000', color: '#ffffff', borderColor: '#000000' }}>
                   4
                 </div>
-                <h3 className="font-mono font-semibold mb-2 text-foreground">Go Live</h3>
-                <p className="text-muted-foreground text-sm font-mono">
+                <h3 className="font-mono font-semibold mb-2" style={{ color: '#000000' }}>Go Live</h3>
+                <p className="text-sm font-mono" style={{ color: '#000000' }}>
                   Ads go live immediately and publishers start earning revenue.
                 </p>
               </div>
@@ -179,21 +253,47 @@ const Home = () => {
           </div>
 
           {/* CTA Section */}
-          <div className="text-center bg-primary text-primary-foreground p-12 border border-border">
-            <h2 className="text-3xl font-mono font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-xl mb-8 font-mono opacity-90">
+          <div className="text-center p-12 border-2" style={{ backgroundColor: '#000000', borderColor: '#000000' }}>
+            <h2 className="text-3xl font-mono font-bold mb-4" style={{ color: '#ffffff' }}>Ready to Get Started?</h2>
+            <p className="text-xl mb-8 font-mono" style={{ color: '#ffffff' }}>
               Join the decentralized advertising revolution today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
                 href="/blog" 
-                className="bg-background text-foreground px-8 py-3 hover:bg-secondary transition-colors font-mono border border-border"
+                className="px-8 py-3 transition-colors font-mono border-2"
+                style={{ 
+                  backgroundColor: '#ffffff', 
+                  color: '#000000',
+                  borderColor: '#ffffff'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ff3131';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#000000';
+                }}
               >
                 Try Demo
               </Link>
               <Link 
                 href="/dashboard" 
-                className="bg-secondary text-secondary-foreground px-8 py-3 hover:bg-secondary/80 transition-colors font-mono border border-border"
+                className="px-8 py-3 transition-colors font-mono border-2"
+                style={{ 
+                  backgroundColor: '#ff3131', 
+                  color: '#ffffff',
+                  borderColor: '#ff3131'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#000000';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ff3131';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
               >
                 Start Publishing
               </Link>

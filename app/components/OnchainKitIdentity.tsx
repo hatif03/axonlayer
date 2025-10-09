@@ -18,7 +18,20 @@ export function OnchainKitIdentity() {
     return (
       <Button 
         onClick={connect}
-        className="bg-primary text-primary-foreground hover:bg-primary/90"
+        className="border-2"
+        style={{ 
+          backgroundColor: '#000000', 
+          color: '#ffffff',
+          borderColor: '#000000'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = '#ffffff';
+          e.currentTarget.style.color = '#000000';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = '#000000';
+          e.currentTarget.style.color = '#ffffff';
+        }}
       >
         Connect Wallet
       </Button>

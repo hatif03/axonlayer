@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { AdProvider, AdSlot } from 'axon-sdk';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ interface AdSlot {
 }
 
 export default function TestAdsPage() {
+  const router = useRouter();
   const [slots, setSlots] = useState<AdSlot[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,6 +31,21 @@ export default function TestAdsPage() {
     websiteId: 'axonlayer-test',
     walletAddress: '0x6d63C3DD44983CddEeA8cB2e730b82daE2E91E32',
     apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
+  const handleSlotClick = (slotId: string) => {
+    // Find the slot data to get price and other details
+    const slot = slots.find(s => s.id === slotId);
+    if (slot) {
+      const params = new URLSearchParams({
+        slotId: slot.id,
+        price: slot.basePrice,
+        size: slot.size,
+        durations: slot.durationOptions.join(','),
+        category: slot.category || 'general'
+      });
+      router.push(`/checkout?${params.toString()}`);
+    }
   };
 
   useEffect(() => {
@@ -159,6 +176,7 @@ export default function TestAdsPage() {
                       durations={slot.durationOptions}
                       category={slot.category}
                       clickable={true}
+                      onSlotClick={handleSlotClick}
                     />
                   </div>
                   

@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
-@font-face {
-  font-family: 'Press Start 2P';
-  src: url('/PressStart2P-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -94,13 +86,14 @@
   
   /* Press Start 2P font for AxonLayer branding */
   .press-start-2p-regular {
-    font-family: "Press Start 2P", "Courier New", monospace, system-ui;
+    font-family: var(--font-press-start-2p), monospace;
     font-weight: 400;
     font-style: normal;
-    font-size: 3rem;
-    line-height: 1.2;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-size: 2.5rem;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
   }
 }

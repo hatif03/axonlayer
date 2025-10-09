@@ -1,10 +1,36 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { AdProvider, AdSlot } from 'axon-sdk';
 
 export default function BlogDemo() {
+  const router = useRouter();
+  
   const adConfig = {
     websiteId: 'axonlayer-blog-demo',
     walletAddress: '0x3c11A511598fFD31fE4f6E3BdABcC31D99C1bD10',
     apiBaseUrl: 'https://api.axonlayer.com'
+  };
+
+  const handleSlotClick = (slotId: string) => {
+    // For blog ads, we'll use default values based on slot type
+    const slotConfigs = {
+      'header-banner': { price: '0.25', size: 'banner', durations: '1h,6h,24h', category: 'technology' },
+      'mid-article': { price: '0.15', size: 'square', durations: '30m,1h,2h', category: 'technology' },
+      'sidebar': { price: '0.20', size: 'sidebar', durations: '1h,6h,24h', category: 'technology' },
+      'footer-banner': { price: '0.18', size: 'banner', durations: '2h,6h,12h', category: 'technology' }
+    };
+    
+    const config = slotConfigs[slotId as keyof typeof slotConfigs] || { price: '0.10', size: 'banner', durations: '1h,6h,24h', category: 'general' };
+    
+    const params = new URLSearchParams({
+      slotId: slotId,
+      price: config.price,
+      size: config.size,
+      durations: config.durations,
+      category: config.category
+    });
+    router.push(`/checkout?${params.toString()}`);
   };
 
   return (
@@ -22,6 +48,7 @@ export default function BlogDemo() {
             price="0.25"
             durations={['1h', '6h', '24h']}
             category="technology"
+            onSlotClick={handleSlotClick}
           />
         </div>
 
@@ -46,6 +73,7 @@ export default function BlogDemo() {
               price="0.15"
               durations={['30m', '1h', '2h']}
               category="technology"
+              onSlotClick={handleSlotClick}
             />
           </div>
 
@@ -96,6 +124,7 @@ export default function BlogDemo() {
             price="0.20"
             durations={['1h', '6h', '24h']}
             category="technology"
+            onSlotClick={handleSlotClick}
           />
         </aside>
 
@@ -107,6 +136,7 @@ export default function BlogDemo() {
             price="0.18"
             durations={['2h', '6h', '12h']}
             category="technology"
+            onSlotClick={handleSlotClick}
           />
         </div>
       </div>
