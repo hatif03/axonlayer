@@ -145,3 +145,5 @@ export async function getQueueInfoFallback(slotId: string): Promise<{
     isAvailable: !activePlacement || new Date(activePlacement.expiresAt) <= new Date()
   };
 }
+
+
